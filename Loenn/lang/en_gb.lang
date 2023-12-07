@@ -1,35 +1,45 @@
 $ Entities
-entities.DzhakeHelper/CossetteRefill.placements.name.normal=Cossette Refill
-entities.DzhakeHelper/CossetteRefill.attributes.description.oneUse=If checked then refill is destroyed after use.
-entities.DzhakeHelper/CossetteRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
-entities.DzhakeHelper/CossetteRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
+entities.DzhakeHelper/SequenceRefill.placements.name.normal=Sequence Refill
+entities.DzhakeHelper/SequenceRefill.attributes.description.oneUse=If checked then refill is destroyed after use.
+entities.DzhakeHelper/SequenceRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
+entities.DzhakeHelper/SequenceRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
+
+entities.DzhakeHelper/PufferRefill.placements.name.normal=Sequence Refill
+entities.DzhakeHelper/PufferRefill.attributes.description.oneUse=If checked then refill is destroyed after use.
+entities.DzhakeHelper/PufferRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
+entities.DzhakeHelper/PufferRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
 
 entities.DzhakeHelper/FreezeRefill.placements.name.normal=Freeze Refill
+entities.DzhakeHelper/FreezeRefill.placements.name.normal=Sequence Refill
+entities.DzhakeHelper/FreezeRefill.attributes.description.oneUse=If checked then refill is destroyed after use.
+entities.DzhakeHelper/FreezeRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
+entities.DzhakeHelper/FreezeRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
+entities.DzhakeHelper/FreezeRefill.attributes.description.delay=Delay before freeze.
 
-entities.DzhakeHelper/CossetteBlock.placements.name.cossette_block_0=Cossette Block (0 - Blue)
-entities.DzhakeHelper/CossetteBlock.placements.name.cossette_block_1=Cossette Block (1 - Rose)
-entities.DzhakeHelper/CossetteBlock.placements.name.cossette_block_2=Cossette Block (2 - Bright Sun)
-entities.DzhakeHelper/CossetteBlock.placements.name.cossette_block_3=Cossette Block (3 - Malachite)
-entities.DzhakeHelper/CossetteBlock.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
-entities.DzhakeHelper/CossetteBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+entities.DzhakeHelper/SequenceBlock.placements.name.sequence_block_0=Sequence Block (0 - Blue)
+entities.DzhakeHelper/SequenceBlock.placements.name.sequence_block_1=Sequence Block (1 - Rose)
+entities.DzhakeHelper/SequenceBlock.placements.name.sequence_block_2=Sequence Block (2 - Bright Sun)
+entities.DzhakeHelper/SequenceBlock.placements.name.sequence_block_3=Sequence Block (3 - Malachite)
+entities.DzhakeHelper/SequenceBlock.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
+entities.DzhakeHelper/SequenceBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
 
-entities.DzhakeHelper/CossetteBlockManager.placements.name.normal=Cossette Block Controller
-entities.DzhakeHelper/CossetteBlockManager.attributes.description.everyDash=If checked then cycle blocks after every dash.
+entities.DzhakeHelper/SequenceBlockManager.placements.name.normal=Sequence Block Controller
+entities.DzhakeHelper/SequenceBlockManager.attributes.description.everyDash=If checked then cycle blocks after every dash.
 
-entities.DzhakeHelper/CossetteTouchSwitch.placements.name.normal=Cossette Touch Switch
-entities.DzhakeHelper/CossetteTouchSwitch.attributes.description.group=When all touch switches from same group are activated Cossette blocks will cycle. Two groups means that they will cycle twice.
-entities.DzhakeHelper/CossetteTouchSwitch.attributes.name.groudReset=Reset on ground.
+entities.DzhakeHelper/SequenceTouchSwitch.placements.name.normal=Sequence Touch Switch
+entities.DzhakeHelper/SequenceTouchSwitch.attributes.description.group=When all touch switches from same group are activated Sequence blocks will cycle. Two groups means that they will cycle twice.
+entities.DzhakeHelper/SequenceTouchSwitch.attributes.name.groudReset=Reset on ground.
 
-entities.DzhakeHelper/CossetteZipMover.placements.name.cossette_zipMover_0=Cossette Zip Mover (0 - Blue)
-entities.DzhakeHelper/CossetteZipMover.placements.name.cossette_zipMover_1=Cossette Zip Mover (1 - Rose)
-entities.DzhakeHelper/CossetteZipMover.placements.name.cossette_zipMover_2=Cossette Zip Mover (2 - Bright Sun)
-entities.DzhakeHelper/CossetteZipMover.placements.name.cossette_zipMover_3=Cossette Zip Mover (3 - Malachite)
-entities.DzhakeHelper/CossetteZipMover.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
-entities.DzhakeHelper/CossetteZipMover.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_0=Sequence Zip Mover (0 - Blue)
+entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_1=Sequence Zip Mover (1 - Rose)
+entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_2=Sequence Zip Mover (2 - Bright Sun)
+entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_3=Sequence Zip Mover (3 - Malachite)
+entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
+entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
 
 
 # Triggers
-triggers.DzhakeHelper/CycleCossetteBlocksTrigger.placements.name.normal=Cycle Cossette Blocks
+triggers.DzhakeHelper/CycleSequenceBlocksTrigger.placements.name.normal=Cycle Sequence Blocks
 
-triggers.DzhakeHelper/SetCossetteBlocksTrigger.placements.name.normal=Set Cossette Blocks
-entities.DzhakeHelper/CossetteRefill.attributes.name.newIndex=Set to
+triggers.DzhakeHelper/SetSequenceBlocksTrigger.placements.name.normal=Set Sequence Blocks
+entities.DzhakeHelper/SequenceRefill.attributes.name.newIndex=Set to

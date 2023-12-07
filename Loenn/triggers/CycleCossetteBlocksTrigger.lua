@@ -1,5 +1,5 @@
-local CycleCossetteBlocksTrigger = {
-    name = "DzhakeHelper/CycleCossetteBlocksTrigger",
+local CycleSequenceBlocksTrigger = {
+    name = "DzhakeHelper/CycleSequenceBlocksTrigger",
     depth = -100,
     fieldInformation = {
         cyclesCount = {
@@ -21,4 +21,4 @@ local CycleCossetteBlocksTrigger = {
 
 
 
-return CycleCossetteBlocksTrigger
+return CycleSequenceBlocksTrigger

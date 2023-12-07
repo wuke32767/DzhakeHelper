@@ -5,8 +5,8 @@ local colorNames = {
     ["Malachite"] = 3
 }
 
-local SetCossetteBlocksTrigger = {
-    name = "DzhakeHelper/SetCossetteBlocksTrigger",
+local SetSequenceBlocksTrigger = {
+    name = "DzhakeHelper/SetSequenceBlocksTrigger",
     depth = -100,
     fieldInformation = {
         newIndex = {
@@ -29,4 +29,4 @@ local SetCossetteBlocksTrigger = {
 
 
 
-return SetCossetteBlocksTrigger
+return SetSequenceBlocksTrigger

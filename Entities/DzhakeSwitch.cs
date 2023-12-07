@@ -106,7 +106,7 @@ public class DzhakeSwitch : Component
 
     private bool FinishedGroupCheck(Level level)
     {
-        foreach (CossetteTouchSwitch entity in level.Tracker.GetEntities<CossetteTouchSwitch>())
+        foreach (SequenceTouchSwitch entity in level.Tracker.GetEntities<SequenceTouchSwitch>())
         {
             if (entity.Group == Group && !entity.Switch.Activated)
             {
@@ -120,7 +120,7 @@ public class DzhakeSwitch : Component
                 component2.Finish();
             }
         }
-        base.Scene.Tracker.GetEntity<CossetteBlockManager>()?.CycleCossetteBlocks();
+        base.Scene.Tracker.GetEntity<SequenceBlockManager>()?.CycleSequenceBlocks();
         return true;
     }
 }

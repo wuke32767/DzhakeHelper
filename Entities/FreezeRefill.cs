@@ -81,6 +81,10 @@ namespace Celeste.Mod.DzhakeHelper
         private bool useAnyway;
         private bool staminaBased;
 
+        private float delay;
+
+
+
 
         public FreezeRefill(EntityData data, Vector2 offset)
             : base(data.Position + offset)
@@ -93,6 +97,7 @@ namespace Celeste.Mod.DzhakeHelper
             freezeTime = data.Float("freezeTime");
             useAnyway = data.Bool("useAnyway");
             staminaBased = data.Bool("staminaBased");
+            delay = data.Float("delay");
 
             string str = "objects/DzhakeHelper/freezeRefill/";
             Add(outline = new Image(GFX.Game[str + "outline"]));
@@ -224,7 +229,7 @@ namespace Celeste.Mod.DzhakeHelper
 
         private IEnumerator FreezeDelay(Player player)
         {
-            yield return 0.05f;
+            yield return delay;
             Celeste.Freeze(freezeTime);
         }
     }

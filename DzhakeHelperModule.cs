@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
 
 namespace Celeste.Mod.DzhakeHelper {
     public class DzhakeHelperModule : EverestModule {

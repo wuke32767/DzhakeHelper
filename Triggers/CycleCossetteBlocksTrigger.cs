@@ -5,16 +5,16 @@ using Monocle;
 
 namespace Celeste.Mod.DzhakeHelper.Triggers
 {
-    [CustomEntity("DzhakeHelper/CycleCossetteBlocksTrigger")]
+    [CustomEntity("DzhakeHelper/CycleSequenceBlocksTrigger")]
 
-    internal class CycleCossetteBlocksTrigger : Trigger
+    internal class CycleSequenceBlocksTrigger : Trigger
     {
 
         public int cyclesCount;
 
         private bool triggered = false;
 
-        public CycleCossetteBlocksTrigger(EntityData data, Vector2 offset) : base(data, offset)
+        public CycleSequenceBlocksTrigger(EntityData data, Vector2 offset) : base(data, offset)
         {
             cyclesCount = data.Int("cyclesCount");
         }
@@ -25,7 +25,7 @@ namespace Celeste.Mod.DzhakeHelper.Triggers
             {
                 for (int i = 0; i < cyclesCount; i++)
                 {
-                    base.Scene.Tracker.GetEntity<CossetteBlockManager>()?.CycleCossetteBlocks();
+                    base.Scene.Tracker.GetEntity<SequenceBlockManager>()?.CycleSequenceBlocks();
                 }
                 triggered = true;
             }

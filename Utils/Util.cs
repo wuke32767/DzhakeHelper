@@ -13,7 +13,7 @@ public static class Util
 {
     public static void Log(LogLevel logLevel, string str)
     {
-        Logger.Log(logLevel, "Communal Helper", str);
+        Logger.Log(logLevel, "Dzhake Helper", str);
     }
 
     public static void Log(string str)

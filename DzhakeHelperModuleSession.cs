@@ -1,6 +1,7 @@
 namespace Celeste.Mod.DzhakeHelper {
     public class DzhakeHelperModuleSession : EverestModuleSession {
-        public bool HasCossetteDash { get; set; } = false;
+        public bool HasSequenceDash { get; set; } = false;
+        public bool HasPufferDash { get; set; } = false;
 
     }
 }

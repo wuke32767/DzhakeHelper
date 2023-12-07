@@ -5,9 +5,9 @@ using Monocle;
 
 namespace Celeste.Mod.DzhakeHelper.Triggers
 {
-    [CustomEntity("DzhakeHelper/SetCossetteBlocksTrigger")]
+    [CustomEntity("DzhakeHelper/SetSequenceBlocksTrigger")]
 
-    internal class SetCossetteBlocksTrigger : Trigger
+    internal class SetSequenceBlocksTrigger : Trigger
     {
 
         public int newIndex;
@@ -16,7 +16,7 @@ namespace Celeste.Mod.DzhakeHelper.Triggers
 
         private bool OneUse;
 
-        public SetCossetteBlocksTrigger(EntityData data, Vector2 offset) : base(data, offset)
+        public SetSequenceBlocksTrigger(EntityData data, Vector2 offset) : base(data, offset)
         {
             newIndex = data.Int("newIndex");
             OneUse = data.Bool("oneUse");
@@ -27,7 +27,7 @@ namespace Celeste.Mod.DzhakeHelper.Triggers
             if (!(triggered && OneUse)) 
             {
 
-                base.Scene.Tracker.GetEntity<CossetteBlockManager>()?.SetCossetteBlocks(newIndex);
+                base.Scene.Tracker.GetEntity<SequenceBlockManager>()?.SetSequenceBlocks(newIndex);
                 triggered = true;
 
             }

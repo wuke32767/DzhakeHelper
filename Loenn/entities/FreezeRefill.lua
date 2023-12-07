@@ -16,6 +16,7 @@ local FreezeRefill = {
                 staminaBased = true,
                 respawnTime = 2.5,
                 freezeTime = 0.05,
+                delay = 0.05,
             },
         },
     },
