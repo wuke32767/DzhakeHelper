@@ -42,9 +42,16 @@
         <Reference Include="Celeste">
           <HintPath>..\..\legacyRef\Celeste.exe</HintPath>
         </Reference>
+        <Reference Include="NLua">
+          <HintPath>C:\Users\Kirill\NLua.1.6.3\lib\net7.0\NLua.dll</HintPath>
+        </Reference>
         <Reference Include="YamlDotNet">
           <HintPath>..\..\legacyRef\YamlDotNet.dll</HintPath>
         </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Loenn\scripts\" />
     </ItemGroup>
 
   <Choose>

@@ -4,13 +4,7 @@ entities.DzhakeHelper/SequenceRefill.attributes.description.oneUse=If checked th
 entities.DzhakeHelper/SequenceRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
 entities.DzhakeHelper/SequenceRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
 
-entities.DzhakeHelper/PufferRefill.placements.name.normal=Sequence Refill
-entities.DzhakeHelper/PufferRefill.attributes.description.oneUse=If checked then refill is destroyed after use.
-entities.DzhakeHelper/PufferRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
-entities.DzhakeHelper/PufferRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
-
 entities.DzhakeHelper/FreezeRefill.placements.name.normal=Freeze Refill
-entities.DzhakeHelper/FreezeRefill.placements.name.normal=Sequence Refill
 entities.DzhakeHelper/FreezeRefill.attributes.description.oneUse=If checked then refill is destroyed after use.
 entities.DzhakeHelper/FreezeRefill.attributes.description.twoDashes=If checked then player gains two dashes after collecting refill
 entities.DzhakeHelper/FreezeRefill.attributes.description.useAnyway=Refill is used even if player has more dashes than refill gives and more than 20 stamina
@@ -36,6 +30,12 @@ entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_2=Seque
 entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_3=Sequence Zip Mover (3 - Malachite)
 entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
 entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+
+entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
+
+entities.DzhakeHelper/DashAttackController.placements.name.normal=Dash Attack Controller
+
+entities.DzhakeHelper/CustomDecal.placements.name.normal=Custom Decal
 
 
 # Triggers

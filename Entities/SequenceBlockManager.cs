@@ -26,10 +26,6 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         {
             startWith = data.Int("startWith");
             everyDash = data.Bool("everyDash");
-            if (everyDash )
-            {
-                DzhakeHelperModule.Session.HasSequenceDash = true;
-            }
         }
 
         public override void Awake(Scene scene)

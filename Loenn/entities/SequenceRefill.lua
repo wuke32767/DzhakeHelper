@@ -7,15 +7,13 @@ local SequenceRefill = {
     width = 10,
     height = 10,
     placements = {
-        {
-            name = "normal",
-            data = {
+        name = "normal",
+        data = {
 
-                oneUse = false,
-                useAnyway = false,
-                staminaBased = true,
-                respawnTime = 2.5,
-            },
+            oneUse = false,
+            useAnyway = false,
+            staminaBased = true,
+            respawnTime = 2.5,
         },
     },
     selection = function(room, entity)

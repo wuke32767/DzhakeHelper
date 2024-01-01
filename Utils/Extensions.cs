@@ -1,16 +1,6 @@
-﻿using Celeste.Mod.Helpers;
-using FMOD.Studio;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Monocle;
-using MonoMod.Utils;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml;
+using NLua;
 
 namespace Celeste.Mod.DzhakeHelper;
 

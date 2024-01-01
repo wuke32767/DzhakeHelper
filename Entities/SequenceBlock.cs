@@ -444,6 +444,5 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         }
     }
 
-    
-}
 
+}
