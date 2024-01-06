@@ -5,7 +5,7 @@ local CustomDecal = {
     placements = {
         name = "normal",
         data = {
-            texture = "_fallback",
+            imagePath = "_fallback",
             animated = false,
             scaleX = 1,
             scaleY = 1,
@@ -24,5 +24,8 @@ local CustomDecal = {
     }
 }
 
+function CustomDecal.texture(room, entity)
+    return entity.imagePath
+end
 
 return CustomDecal

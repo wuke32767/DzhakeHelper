@@ -27,7 +27,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         {
             Depth = data.Int("Depth");
             Logger.Log(LogLevel.Error, "DSKDlslada", Depth.ToString());
-            ImagePath = data.Attr("texture");
+            ImagePath = data.Attr("imagePath");
             Animated = data.Bool("animated");
             if (Animated)
             {
