@@ -1,2 +1,1 @@
-Mod for Celeste
-read the wiki
+Mod for Celeste, read the wiki. Uhh, hi, test message??
