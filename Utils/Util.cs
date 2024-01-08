@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using Monocle;
+using YamlDotNet.Core.Tokens;
 
 namespace Celeste.Mod.DzhakeHelper;
 
@@ -249,4 +250,27 @@ public static class Util
         }
         action(1.0f);
     }
+
+
+
+    // Hi, no, i didn't just copypaste this
+
+    public enum DirectionEnum
+    {
+        Right, BottomRight,
+        Bottom, BottomLeft,
+        Left, TopLeft,
+        Top, TopRight
+    }
+
+    public static Dictionary<DirectionEnum,Vector2> Directions = new() {
+        { DirectionEnum.Right, new Vector2(1f, 0f) },
+        { DirectionEnum.Left, new Vector2(-1f, 0f) },
+        { DirectionEnum.Bottom, new Vector2(0f, 1f) },
+        { DirectionEnum.Top, new Vector2(0f, -1f) },
+        { DirectionEnum.BottomRight, new Vector2(1f, 1f) },
+        { DirectionEnum.BottomLeft, new Vector2(-1f, 1f) },
+        { DirectionEnum.TopRight, new Vector2(1f, -1f) },
+        { DirectionEnum.TopLeft, new Vector2(-1f, -1f) },
+    };
 }

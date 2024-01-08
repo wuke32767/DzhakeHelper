@@ -36,6 +36,13 @@ entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
 entities.DzhakeHelper/DashAttackController.placements.name.normal=Dash Attack Controller
 
 entities.DzhakeHelper/CustomDecal.placements.name.normal=Custom Decal
+entities.DzhakeHelper/CustomDecal.attributes.description.imagePath=Relative to Graphics/Atlases/Gameplay/
+
+entities.DzhakeHelper/CustomHiResDecal.placements.name.normal=Custom Hi Res Decal
+entities.DzhakeHelper/CustomHiResDecal.attributes.description.imagePath=Relative to Graphics/Atlases/Gui/
+entities.DzhakeHelper/CustomHiResDecal.attributes.description.rotation=In degrees
+
+entities.DzhakeHelper/VoidLift.placements.name.normal=Void Lift
 
 
 # Triggers

@@ -21,12 +21,12 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public bool Animated;
 
-        public string AnimationID;
+        public string Flag;
 
         public CustomDecal(EntityData data, Vector2 offset) : base(data.Position + offset)
         {
             Depth = data.Int("Depth");
-            Logger.Log(LogLevel.Error, "DSKDlslada", Depth.ToString());
+            Flag = data.Attr("flag");
             ImagePath = data.Attr("imagePath");
             Animated = data.Bool("animated");
             if (Animated)
@@ -53,29 +53,18 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public override void Render()
         {
-            if (Animated)
-            {
-                Sprite.Play(AnimationID);
-            }
-            else
+            if (Flag != null && (base.Scene as Level).Session.GetFlag(Flag))
             {
                 Image.DrawCentered(Position, Color, Scale, Rotation);
+               
             }
-            base.Render();
         }
 
         public void UpdateSprite()
-        { 
-            if (Animated && Sprite != null)
-            {
-                Sprite.Color = Color;
-                Sprite.Scale = Scale;
-                Sprite.Rotation = Rotation;
-                Sprite.Play(AnimationID);
-            } else
-            {
-                Image = GFX.Game[ImagePath];
-            }
+        {
+            
+            Image = GFX.Game[ImagePath];
+            
         }
     }
 }

@@ -1,6 +1,8 @@
 - Name: DzhakeHelper
-  Version: 0.4
+  Version: 0.6.0
   DLL: bin/DzhakeHelper.dll
   Dependencies:
     - Name: Everest
       Version: 1.3471.0
+    - Name: LuaCutscenes
+      Version: 0.2.12

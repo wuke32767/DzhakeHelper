@@ -1,12 +1,10 @@
 local CustomDecal = {
     name = "DzhakeHelper/CustomDecal",
-    width = 10,
-    height = 10,
     placements = {
         name = "normal",
         data = {
             imagePath = "_fallback",
-            animated = false,
+            --animated = false, commented beucase.... I need to fix it :laugheline:
             scaleX = 1,
             scaleY = 1,
             rotation = 0,

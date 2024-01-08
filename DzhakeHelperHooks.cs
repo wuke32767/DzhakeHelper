@@ -1,11 +1,6 @@
 ﻿using Celeste.Mod.DzhakeHelper.Entities;
 using Microsoft.Xna.Framework;
-using MonoMod.Utils;
-using Monocle;
-using MonoMod.Cil;
-using Mono.Cecil.Cil;
-using MonoMod.RuntimeDetour;
-using System.Reflection;
+using Celeste.Mod.DzhakeHelper.Utils;
 
 namespace Celeste.Mod.DzhakeHelper
 {
@@ -17,18 +12,14 @@ namespace Celeste.Mod.DzhakeHelper
         {
             On.Celeste.LevelLoader.LoadingThread += CustomDashInitialize;
             On.Celeste.Player.DashBegin += CustomDashBegin;
-            On.Celeste.Player.DashEnd += CustomDashEnd;
             On.Celeste.Player.Die += PlayerDeath;
-            On.Celeste.Player.Update += PlayerUpdate;
         }
 
         public static void Unload()
         {
             On.Celeste.LevelLoader.LoadingThread -= CustomDashInitialize;
             On.Celeste.Player.DashBegin -= CustomDashBegin;
-            On.Celeste.Player.DashEnd -= CustomDashEnd; 
             On.Celeste.Player.Die -= PlayerDeath;
-            On.Celeste.Player.Update -= PlayerUpdate;
         }
 
         private static void CustomDashInitialize(On.Celeste.LevelLoader.orig_LoadingThread orig, LevelLoader self)
@@ -40,8 +31,6 @@ namespace Celeste.Mod.DzhakeHelper
         private static void CustomDashBegin(On.Celeste.Player.orig_DashBegin orig, Player self)
         {
             bool callOrig = true;
-
-            DzhakeHelperModule.Session.Dashing = true;
 
             SequenceBlockManager manager = self.Scene.Tracker.GetEntity<SequenceBlockManager>();
             if (manager != null)
@@ -75,26 +64,6 @@ namespace Celeste.Mod.DzhakeHelper
             }
         }
 
-        private static void CustomDashEnd(On.Celeste.Player.orig_DashEnd orig, Player self)
-        {
-            DzhakeHelperModule.Session.Dashing = false;
-        }
-
-        private static void PlayerUpdate(On.Celeste.Player.orig_Update orig, Player self)
-        {
-            DashAttackController dashAttackController = self.Scene.Tracker.GetEntity<DashAttackController>();
-            if (dashAttackController != null)
-            {
-                DynamicData playerData = DynamicData.For(self);
-                float dashAttackTimer = playerData.Get<float>("dashAttackTimer");
-                if (dashAttackController != null && dashAttackController.always)
-                {
-                    playerData.Set("dashAttackTimer", dashAttackTimer + Engine.DeltaTime + 1f);
-                }
-            }
-
-            orig(self);
-        }
 
         private static PlayerDeadBody PlayerDeath(On.Celeste.Player.orig_Die orig, Player self, Vector2 direction, bool evenIfInvincible, bool registerDeathInStats)
         {
