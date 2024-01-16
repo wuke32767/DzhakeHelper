@@ -1,18 +1,14 @@
 ﻿using MonoMod.Utils;
 using NLua;
 using System.Linq;
-using System.Collections;
 using Monocle;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Celeste.Mod.DzhakeHelper.Utils
 {
     public static class Lua
     {
-        public static NLua.Lua State = new NLua.Lua();
-
-        public static string PartSkipMessage = "";
-
-        public static LuaTable CutsceneHelper = Everest.LuaLoader.Require($"{DzhakeHelperModule.Instance.Metadata.Name}:/Assets/LuaCutscenes/cutscene_helper") as LuaTable;
 
         // Privating
         public static object GetPrivateMember(object obj, string name)
@@ -52,6 +48,69 @@ namespace Celeste.Mod.DzhakeHelper.Utils
         {
             DzhakeHelperModule.Session.StoredVariables.Remove(name);   
         }
+
+
+        // FIND HIM!
+
+        public static Entity FindEntity(string type)
+        {
+            foreach (Entity entity in Engine.Scene.Entities)
+            {
+                if (entity.GetType().FullName == type)
+                {
+                    return entity;
+                }
+            }
+            return null;
+        }
+
+        public static List<Entity> FindEntities(string type)
+        {
+            List<Entity> entities = [];
+            foreach (Entity entity in Engine.Scene.Entities)
+            {
+                if (entity.GetType().FullName == type)
+                {
+                    entities.Add(entity);
+                }
+            }
+            return entities;
+        }
+
+
+        // https://github.com/Cruor/LuaCutscenes/blob/master/Helpers/LuaHelper.cs
+
+
+        public static LuaTable DictionaryToLuaTable(IDictionary<object, object> dict)
+        {
+            NLua.Lua lua = Everest.LuaLoader.Context;
+            LuaTable table = lua.DoString("return {}").FirstOrDefault() as LuaTable;
+
+            foreach (KeyValuePair<object, object> pair in dict)
+            {
+                table[pair.Key] = pair.Value;
+            }
+
+            return table;
+        }
+
+        public static LuaTable ListToLuaTable(IList list)
+        {
+            NLua.Lua lua = Everest.LuaLoader.Context;
+            LuaTable table = lua.DoString("return {}").FirstOrDefault() as LuaTable;
+
+            int ptr = 1;
+
+            foreach (var value in list)
+            {
+                table[ptr++] = value;
+            }
+
+
+            return table;
+        }
+        
+
 
 
         // Skipping (Probably not going to make)

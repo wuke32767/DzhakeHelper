@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Celeste.Mod.DzhakeHelper.Utils;
+using Microsoft.Xna.Framework;
 using Monocle;
-using NLua;
 
 namespace Celeste.Mod.DzhakeHelper;
 
 public static class Extensions
 {
-    
-
     public static Color Mult(this Color color, Color other)
     {
         color.R = (byte)(color.R * other.R / 256f);
@@ -15,6 +13,13 @@ public static class Extensions
         color.B = (byte)(color.B * other.B / 256f);
         color.A = (byte)(color.A * other.A / 256f);
         return color;
+    }
+
+    public static Color ShiftHue(this Color color, float amount)
+    {
+        HSVColor hsvColor = new(color);
+        hsvColor.H = (hsvColor.H + amount) % 360f;
+        return Calc.HsvToColor(hsvColor.H / 360, hsvColor.S, hsvColor.V); ;
     }
 
     public static Rectangle GetBounds(this Camera camera)

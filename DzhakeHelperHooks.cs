@@ -1,6 +1,6 @@
 ﻿using Celeste.Mod.DzhakeHelper.Entities;
 using Microsoft.Xna.Framework;
-using Celeste.Mod.DzhakeHelper.Utils;
+using Monocle;
 
 namespace Celeste.Mod.DzhakeHelper
 {
@@ -14,6 +14,7 @@ namespace Celeste.Mod.DzhakeHelper
             On.Celeste.Player.DashBegin += CustomDashBegin;
             On.Celeste.Player.Die += PlayerDeath;
         }
+
 
         public static void Unload()
         {
@@ -77,6 +78,7 @@ namespace Celeste.Mod.DzhakeHelper
             DzhakeHelperModule.Session.HasSequenceDash = false;
             DzhakeHelperModule.Session.HasPufferDash = false;
         }
+
 
     }
 

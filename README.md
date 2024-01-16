@@ -1,1 +1,1 @@
-Mod for Celeste, read the wiki. sdsadsadas
+Mod for Celeste, read the wiki.

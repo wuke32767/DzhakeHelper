@@ -44,6 +44,12 @@ entities.DzhakeHelper/CustomHiResDecal.attributes.description.rotation=In degree
 
 entities.DzhakeHelper/VoidLift.placements.name.normal=Void Lift
 
+entities.DzhakeHelper/RainbowHairBadelineDummy.placements.name.normal=Rainbow Hair Badeline Dummy
+
+entities.DzhakeHelper/PauseRefill.placements.name.one_dash=Pause Refill (CURSED) (One dash)
+entities.DzhakeHelper/PauseRefill.placements.name.two_dashes=Pause Refill (CURSED) (Two dashes)
+
+
 
 # Triggers
 triggers.DzhakeHelper/CycleSequenceBlocksTrigger.placements.name.normal=Cycle Sequence Blocks

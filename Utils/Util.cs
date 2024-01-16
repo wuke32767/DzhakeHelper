@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using Monocle;
-using YamlDotNet.Core.Tokens;
 
 namespace Celeste.Mod.DzhakeHelper;
 
@@ -19,7 +18,7 @@ public static class Util
 
     public static void Log(string str)
     {
-        Log(LogLevel.Debug, str);
+        Log(LogLevel.Error, str);
     }
 
     public static bool TryGetPlayer(out Player player)

@@ -53,7 +53,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public override void Render()
         {
-            if (Flag != null && (base.Scene as Level).Session.GetFlag(Flag))
+            if (Flag != null && (base.Scene as Level).Session.GetFlag(Flag) && Image != null)
             {
                 Image.DrawCentered(Position, Color, Scale, Rotation);
                
