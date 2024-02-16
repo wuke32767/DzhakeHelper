@@ -32,7 +32,10 @@ local CustomHiResDecal = {
             editable = false,
             options = spriteBanks
         },
-    }
+    },
+    fieldOrder = {
+        x,y,imagePath,depth,scaleX,scaleY,rotation,color
+    },
 }
 
 return CustomHiResDecal

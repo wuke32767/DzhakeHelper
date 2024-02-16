@@ -42,6 +42,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             }
 
             typesCount++;
+            if (typesCount == 1) typesCount++; // 2 is minimum cuz why not
 
             currentIndex = startWith;
 

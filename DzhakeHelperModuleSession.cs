@@ -6,8 +6,6 @@ namespace Celeste.Mod.DzhakeHelper {
         public bool HasSequenceDash { get; set; } = false;
         public bool HasPufferDash { get; set; } = false;
 
-        public bool ShowSkipPart = false;
-
         public Dictionary<string, object> StoredVariables;
 
     }

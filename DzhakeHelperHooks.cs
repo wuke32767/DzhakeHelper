@@ -1,6 +1,7 @@
 ﻿using Celeste.Mod.DzhakeHelper.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
+using System.Collections;
 
 namespace Celeste.Mod.DzhakeHelper
 {
@@ -75,8 +76,11 @@ namespace Celeste.Mod.DzhakeHelper
 
         private static void ResetDashSession()
         {
-            DzhakeHelperModule.Session.HasSequenceDash = false;
-            DzhakeHelperModule.Session.HasPufferDash = false;
+            if (DzhakeHelperModule.Session != null)
+            {
+                DzhakeHelperModule.Session.HasSequenceDash = false;
+                DzhakeHelperModule.Session.HasPufferDash = false;
+            }
         }
 
 

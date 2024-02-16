@@ -1,6 +1,7 @@
 ﻿using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
+using System;
 
 namespace Celeste.Mod.DzhakeHelper.Entities
 {
@@ -31,7 +32,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             ScaleX = data.Float("scaleX");
             ScaleY = data.Float("scaleY");
             Rotation = data.Float("rotation");
-            Color = data.HexColor("color");
+            Color = Calc.HexToColorWithAlpha((string)data.Values["color"]);
             SpriteFolder = data.Enum("pathStart", SpriteBank.Gui);
         }
         public override void Added(Scene scene)

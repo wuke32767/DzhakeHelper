@@ -20,7 +20,7 @@ sequenceBlockManager = {
 
     name = "DzhakeHelper/SequenceBlockManager",
     depth = -100,
-    texture = "objects/DzhakeHelper/SequenceBlockManager/idle",
+    texture = "objects/DzhakeHelper/sequenceBlockManager/idle",
     placements = {
         {
             name = "normal",

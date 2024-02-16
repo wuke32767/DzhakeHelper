@@ -37,6 +37,9 @@ entities.DzhakeHelper/DashAttackController.placements.name.normal=Dash Attack Co
 
 entities.DzhakeHelper/CustomDecal.placements.name.normal=Custom Decal
 entities.DzhakeHelper/CustomDecal.attributes.description.imagePath=Relative to Graphics/Atlases/Gameplay/
+entities.DzhakeHelper/CustomDecal.attributes.description.animationName=(for animated) Graphics/Atlases/Gameplay/<ImagePath>/<AnimationName>.png, so ImagePath is folder, and AnimationName is file name (without 00)
+entities.DzhakeHelper/CustomDecal.attributes.description.delay=(for animated) delay between frames
+entities.DzhakeHelper/CustomDecal.attributes.description.updateSpriteOnlyIfFlag=(for animated) animation will not play while flag is off
 
 entities.DzhakeHelper/CustomHiResDecal.placements.name.normal=Custom Hi Res Decal
 entities.DzhakeHelper/CustomHiResDecal.attributes.description.imagePath=Relative to Graphics/Atlases/Gui/
@@ -45,10 +48,6 @@ entities.DzhakeHelper/CustomHiResDecal.attributes.description.rotation=In degree
 entities.DzhakeHelper/VoidLift.placements.name.normal=Void Lift
 
 entities.DzhakeHelper/RainbowHairBadelineDummy.placements.name.normal=Rainbow Hair Badeline Dummy
-
-entities.DzhakeHelper/PauseRefill.placements.name.one_dash=Pause Refill (CURSED) (One dash)
-entities.DzhakeHelper/PauseRefill.placements.name.two_dashes=Pause Refill (CURSED) (Two dashes)
-
 
 
 # Triggers

@@ -4,12 +4,17 @@ local CustomDecal = {
         name = "normal",
         data = {
             imagePath = "_fallback",
-            --animated = false, commented beucase.... I need to fix it :laugheline:
+            animated = false,
+            animationName = "idle",
+            delay = 0.1,
             scaleX = 1,
             scaleY = 1,
             rotation = 0,
             color = "FFFFFF",
             depth = 0,
+            flag = "",
+            updateSpriteOnlyIfFlag = true,
+            inversedFlag = false,
         },
     },
     fieldInformation = {
@@ -19,10 +24,14 @@ local CustomDecal = {
         color = {
             fieldType = "color"
         },
+    },
+    fieldOrder = {
+        "x","y","imagePath","animationName","delay","depth","scaleX","scaleY","rotation","color","flag","updateSpriteOnlyIfFlag","inversedFlag"
     }
 }
 
 function CustomDecal.texture(room, entity)
+    if entity.animated then return entity.imagePath..entity.animationName.."00" end
     return entity.imagePath
 end
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 
 namespace Celeste.Mod.DzhakeHelper {
     public class DzhakeHelperModule : EverestModule {

@@ -4,6 +4,8 @@ using System.Linq;
 using Monocle;
 using System.Collections.Generic;
 using System.Collections;
+using System;
+using Microsoft.Xna.Framework;
 
 namespace Celeste.Mod.DzhakeHelper.Utils
 {
@@ -50,33 +52,6 @@ namespace Celeste.Mod.DzhakeHelper.Utils
         }
 
 
-        // FIND HIM!
-
-        public static Entity FindEntity(string type)
-        {
-            foreach (Entity entity in Engine.Scene.Entities)
-            {
-                if (entity.GetType().FullName == type)
-                {
-                    return entity;
-                }
-            }
-            return null;
-        }
-
-        public static List<Entity> FindEntities(string type)
-        {
-            List<Entity> entities = [];
-            foreach (Entity entity in Engine.Scene.Entities)
-            {
-                if (entity.GetType().FullName == type)
-                {
-                    entities.Add(entity);
-                }
-            }
-            return entities;
-        }
-
 
         // https://github.com/Cruor/LuaCutscenes/blob/master/Helpers/LuaHelper.cs
 
@@ -109,7 +84,41 @@ namespace Celeste.Mod.DzhakeHelper.Utils
 
             return table;
         }
-        
+
+
+        // just some random stuff lol
+
+        public static IEnumerator CustomWalkTo(Player player, float x, bool walkBackwards = false, float speedMultiplier = 1f, bool keepWalkingIntoWalls = false, bool changeSpriteAfter = true)
+        {
+            player.StateMachine.State = 11;
+            if (Math.Abs(player.X - x) > 4f && !player.Dead)
+            {
+                player.DummyMoving = true;
+                if (walkBackwards)
+                {
+                    player.Sprite.Rate = -1f;
+                    player.Facing = (Facings)Math.Sign(player.X - x);
+                }
+                else
+                {
+                    player.Facing = (Facings)Math.Sign(x - player.X);
+                }
+
+                while (Math.Abs(x - player.X) > 4f && Engine.Scene != null && (keepWalkingIntoWalls || !player.CollideCheck<Solid>(player.Position + Vector2.UnitX * Math.Sign(x - player.X))))
+                {
+                    player.Speed.X = Calc.Approach(player.Speed.X, (float)Math.Sign(x - player.X) * 64f * speedMultiplier, 1000f * Engine.DeltaTime);
+                    yield return null;
+                }
+
+                if (changeSpriteAfter)
+                {
+                    player.Sprite.Rate = 1f;
+                    player.Sprite.Play("idle");
+                }
+                player.DummyMoving = false;
+            }
+        }
+
 
 
 
