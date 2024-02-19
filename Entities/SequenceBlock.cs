@@ -47,6 +47,11 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         //public bool BlockedByHoldables;
 
+        public string ImagePath;
+
+        public bool UseCustomColor = false;
+
+
         public float Tempo;
 
         public bool Activated;
@@ -90,22 +95,31 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             ID = id;
             Index = data.Int("index");
             BlockedByPlayer = data.Bool("blockedByPlayer");
+            ImagePath = data.Attr("imagePath","objects/DzhakeHelper/sequenceBlock/");
             BlockedByTheo = data.Bool("blockedByTheo");
             //BlockedByHoldables = data.Bool("blockedByHoldables");
-            switch (Index)
+            UseCustomColor = data.Bool("useCustomColor");
+            if (UseCustomColor)
             {
-                default:
-                    color = Calc.HexToColor("5c5bda");
-                    break;
-                case 1:
-                    color = Calc.HexToColor("ff0051");
-                    break;
-                case 2:
-                    color = Calc.HexToColor("ffd700");
-                    break;
-                case 3:
-                    color = Calc.HexToColor("49dc88");
-                    break;
+                color = data.HexColorWithAlpha("color");
+            }
+            else
+            {
+                switch (Index)
+                {
+                    default:
+                        color = Calc.HexToColor("5c5bda");
+                        break;
+                    case 1:
+                        color = Calc.HexToColor("ff0051");
+                        break;
+                    case 2:
+                        color = Calc.HexToColor("ffd700");
+                        break;
+                    case 3:
+                        color = Calc.HexToColor("49dc88");
+                        break;
+                }
             }
             Add(occluder = new LightOcclude());
         }
@@ -279,9 +293,9 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         private void SetImage(float x, float y, int tx, int ty)
         {
-            List<MTexture> atlasSubtextures = GFX.Game.GetAtlasSubtextures("objects/DzhakeHelper/sequenceBlock/pressed");
+            List<MTexture> atlasSubtextures = GFX.Game.GetAtlasSubtextures(ImagePath + "pressed");
             pressed.Add(CreateImage(x, y, tx, ty, atlasSubtextures[Index % atlasSubtextures.Count]));
-            solid.Add(CreateImage(x, y, tx, ty, GFX.Game["objects/DzhakeHelper/sequenceBlock/solid"]));
+            solid.Add(CreateImage(x, y, tx, ty, GFX.Game[ImagePath + "solid"]));
         }
 
         private Image CreateImage(float x, float y, int tx, int ty, MTexture tex)

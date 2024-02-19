@@ -1,19 +1,24 @@
 ﻿using Celeste.Mod.DzhakeHelper.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
+using MonoMod.Cil;
+using MonoMod.RuntimeDetour;
 using System.Collections;
+using System.Reflection;
+using YamlDotNet.Core;
 
 namespace Celeste.Mod.DzhakeHelper
 {
     public class DzhakeHelperHooks
     {
 
-
         public static void Load()
         {
             On.Celeste.LevelLoader.LoadingThread += CustomDashInitialize;
             On.Celeste.Player.DashBegin += CustomDashBegin;
             On.Celeste.Player.Die += PlayerDeath;
+            On.Celeste.Player.Update += PlayerUpdate;
+            IL.Celeste.Player.Render += PlayerRender;
         }
 
 
@@ -22,6 +27,8 @@ namespace Celeste.Mod.DzhakeHelper
             On.Celeste.LevelLoader.LoadingThread -= CustomDashInitialize;
             On.Celeste.Player.DashBegin -= CustomDashBegin;
             On.Celeste.Player.Die -= PlayerDeath;
+            On.Celeste.Player.Update -= PlayerUpdate;
+            IL.Celeste.Player.Render -= PlayerRender;
         }
 
         private static void CustomDashInitialize(On.Celeste.LevelLoader.orig_LoadingThread orig, LevelLoader self)
@@ -81,6 +88,43 @@ namespace Celeste.Mod.DzhakeHelper
                 DzhakeHelperModule.Session.HasSequenceDash = false;
                 DzhakeHelperModule.Session.HasPufferDash = false;
             }
+        }
+
+
+        private static void PlayerUpdate(On.Celeste.Player.orig_Update orig, Player self)
+        {
+            if (DzhakeHelperModule.Session.TimedKillTriggerTimeChanged == false)
+            {
+                DzhakeHelperModule.Session.TimedKillTriggerTime = 0f;
+                DzhakeHelperModule.Session.TimedKillTriggerColor = Color.White;
+            }
+            DzhakeHelperModule.Session.TimedKillTriggerTimeChanged = false;
+            DzhakeHelperModule.Session.TimedKillTriggerMaxTime = 0f;
+            orig(self);
+        }
+
+        private static void PlayerRender(ILContext il)
+        {
+            bool happened = false;
+            ILCursor cursor = new ILCursor(il);
+            while (cursor.TryGotoNext(MoveType.After, instr => instr.MatchLdfld<Player>("Sprite"), instr => instr.MatchCall<Color>("get_White")))
+            {
+                cursor.EmitDelegate(PlayersColor);
+                happened = true;
+            }
+            if (!happened)
+            {
+                Logger.Log(LogLevel.Error, "DzhakeHelper/Hooks/PlayerRender", "Hook was NOT applied! Report it to Dzhake, or someone else.");
+            }
+        }
+
+        private static Color PlayersColor(Color oldColor)
+        {
+            if (DzhakeHelperModule.Session.TimedKillTriggerColor != Color.White)
+            {
+                oldColor = DzhakeHelperModule.Session.TimedKillTriggerColor;
+            }
+            return oldColor;
         }
 
 

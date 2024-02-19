@@ -55,3 +55,8 @@ triggers.DzhakeHelper/CycleSequenceBlocksTrigger.placements.name.normal=Cycle Se
 
 triggers.DzhakeHelper/SetSequenceBlocksTrigger.placements.name.normal=Set Sequence Blocks
 entities.DzhakeHelper/SequenceRefill.attributes.name.newIndex=Set to
+
+
+triggers.DzhakeHelper/TimedKillTrigger.placements.name.normal=Timed Kill
+entities.DzhakeHelper/TimedKillTrigger.attributes.name.color=Color which player gets based on time progression
+entities.DzhakeHelper/TimedKillTrigger.attributes.name.liveTime=Time after which player dies

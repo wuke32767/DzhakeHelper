@@ -56,6 +56,9 @@ for i, _ in ipairs(colors) do
             height = 16,
             blockedByPlayer = true,
             blockedByTheo = true,
+            useCustomColor = false,
+            color = "ffffff",
+            imagePath = "objects/DzhakeHelper/sequenceBlock/",
         }
     }
 end
@@ -150,7 +153,8 @@ function sequenceBlock.sprite(room, entity)
 
     local index = entity.index or 0
     local color = colors[index + 1] or colors[1]
-    local frame = frames[index + 1] or frames[1]
+    if entity.useCustomColor then color = entity.color end
+    local frame = entity.imagePath.."solid" or frames[index + 1] or frames[1]
     local depth = depths[index + 1] or depths[1]
 
     for x = 1, tileWidth do

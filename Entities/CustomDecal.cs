@@ -43,14 +43,13 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             Delay = data.Float("delay");
             Scale.X = data.Float("scaleX");
             Scale.Y = data.Float("scaleY");
-            Color = Calc.HexToColorWithAlpha((string)data.Values["color"]);
+            Color = data.HexColorWithAlpha("color");
             Rotation = data.Float("rotation");
             UpdateSprite();
         }
 
         public override void Render()
         {
-            Logger.Log(LogLevel.Error, "DhzkaeHelper/customDecals",Flag);
             if (FlagIsTrue())
             {
                 if (!Animated && Image != null)
