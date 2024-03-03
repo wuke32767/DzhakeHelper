@@ -31,20 +31,26 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public float Delay;
 
-        public CustomDecal(EntityData data, Vector2 offset) : base(data.Position + offset)
+        public CustomDecal(EntityData data, Vector2 offset) : this(data.Position, offset, data.Attr("imagePath"), data.Int("depth"), data.HexColorWithAlpha("color"), new Vector2(data.Float("scaleX"), data.Float("scaleY")), data.Float("rotation"), data.Bool("animated"), data.Attr("flag"), data.Bool("updateSpriteOnlyIfFlag"), data.Bool("inversedFlag"), data.Attr("animationName"), data.Float("delay"))
+        {}
+
+        public CustomDecal(Vector2 position,Vector2 offset, string imagePath, int depth, Color color, Vector2 scale, float rotation, bool animated, string flag, bool updateSpriteOnlyIfFlag, bool inversedFlag, string animationName, float delay) : base(position + offset)
         {
-            base.Depth = data.Int("depth");
-            Flag = data.Attr("flag");
-            UpdateSpriteOnlyIfFlag = data.Bool("updateSpriteOnlyIfFlag");
-            InversedFlag = data.Bool("inversedFlag");
-            ImagePath = data.Attr("imagePath");
-            Animated = data.Bool("animated");
-            AnimationName = data.Attr("animationName");
-            Delay = data.Float("delay");
-            Scale.X = data.Float("scaleX");
-            Scale.Y = data.Float("scaleY");
-            Color = data.HexColorWithAlpha("color");
-            Rotation = data.Float("rotation");
+            base.Depth = depth;
+
+            Flag = flag;
+            UpdateSpriteOnlyIfFlag = updateSpriteOnlyIfFlag;
+            InversedFlag = inversedFlag;
+
+            ImagePath = imagePath;
+            Animated = animated;
+            AnimationName = animationName;
+            Delay = delay;
+
+            Color = color;
+            Scale = scale;
+            Rotation = rotation;
+
             UpdateSprite();
         }
 

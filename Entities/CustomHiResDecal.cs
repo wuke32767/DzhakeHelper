@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Monocle;
 using System;
+using static MonoMod.InlineRT.MonoModRule;
 
 namespace Celeste.Mod.DzhakeHelper.Entities
 {
@@ -14,8 +15,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         };
 
         public string Path;
-        public float ScaleX;
-        public float ScaleY;
+        public Vector2 Scale;
         public float Rotation;
         public Color Color;
         public SpriteBank SpriteFolder;
@@ -25,15 +25,16 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         private static float camScale = 6f;
         private static Vector2 entityOffset = new(12f, 12f);
 
-        public CustomHiResDecal(EntityData data, Vector2 offset) : base(data.Position + offset)
+        public CustomHiResDecal(EntityData data, Vector2 offset) : this(data.Position, offset, data.Attr("imagePath"), data.Int("depth"), new Vector2(data.Float("scaleX"), data.Float("scaleY")), data.Float("rotation"), data.HexColorWithAlpha("color"), data.Enum("pathStart", SpriteBank.Gui))
+        {}
+        public CustomHiResDecal(Vector2 position, Vector2 offset, string imagePath, int depth, Vector2 scale, float rotation,  Color color, SpriteBank pathStart) : base(position + offset)
         {
-            base.Depth = data.Int("depth");
-            Path = data.Attr("imagePath");
-            ScaleX = data.Float("scaleX");
-            ScaleY = data.Float("scaleY");
-            Rotation = data.Float("rotation");
-            Color = Calc.HexToColorWithAlpha((string)data.Values["color"]);
-            SpriteFolder = data.Enum("pathStart", SpriteBank.Gui);
+            base.Depth = depth;
+            Path = imagePath;
+            Scale = scale;
+            Rotation = rotation;
+            Color = color;
+            SpriteFolder = pathStart;
         }
         public override void Added(Scene scene)
         {
@@ -61,7 +62,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             {
                 Camera cam = SceneAs<Level>().Camera;
                 Vector2 displayPos = camScale * (this.Position - cam.Position) + camScale * entityOffset;
-                texture.DrawCentered(displayPos, Color, new Vector2(ScaleX, ScaleY), Rotation / 57.2958f);
+                texture.DrawCentered(displayPos, Color, Scale, Rotation / 57.2958f);
             }
         }
 
