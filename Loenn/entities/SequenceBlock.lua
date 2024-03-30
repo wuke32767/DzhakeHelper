@@ -43,6 +43,9 @@ sequenceBlock.fieldInformation = {
         fieldType = "integer",
         options = colorNames,
         editable = false
+    },
+    color = {
+        fieldType = "color"
     }
 }
 sequenceBlock.placements = {}
@@ -59,6 +62,7 @@ for i, _ in ipairs(colors) do
             useCustomColor = false,
             color = "ffffff",
             imagePath = "objects/DzhakeHelper/sequenceBlock/",
+            backgroundBlock = true,
         }
     }
 end

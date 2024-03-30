@@ -229,16 +229,19 @@ public class SequenceZipMover : SequenceBlock
         this.nodes = data.NodesWithPosition(offset);
         this.BlockedByPlayer = data.Bool("blockedByPlayer");
         this.BlockedByTheo = data.Bool("blockedByTheo");
+        if (ImagePath == "objects/DzhakeHelper/sequenceBlock/")
+        {
+            ImagePath = "objects/DzhakeHelper/sequenceZipMover/";
+        }
 
         Add(new Coroutine(Sequence()));
 
         sfx.Position = new Vector2(Width, Height) / 2f;
         Add(sfx);
 
-
-        cog = GFX.Game["objects/DzhakeHelper/sequenceZipMover/cog"];
-        cogPressed = GFX.Game["objects/DzhakeHelper/sequenceZipMover/cogPressed"];
-        cogWhite = GFX.Game["objects/DzhakeHelper/sequenceZipMover/cogWhite"];
+        cog = GFX.Game[ ImagePath + "cog"];
+        cogPressed = GFX.Game[ ImagePath + "cogPressed"];
+        cogWhite = GFX.Game[ ImagePath + "cogWhite"];
     }
 
     public override void Update()

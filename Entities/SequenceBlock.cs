@@ -35,7 +35,10 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
             public override void Render()
             {
-                Draw.Rect(block.X, block.Y + block.Height - 8f, block.Width, 8 + block.blockHeight, color);
+                if (block.BackgroundBlock)
+                {
+                    Draw.Rect(block.X, block.Y + block.Height - 8f, block.Width, 8 + block.blockHeight, color);
+                }
             }
         }
 
@@ -84,6 +87,8 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         private BoxSide side;
 
+        public bool BackgroundBlock;
+
         protected Vector2 blockOffset => Vector2.UnitY * (2 - blockHeight);
 
 
@@ -96,6 +101,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             Index = data.Int("index");
             BlockedByPlayer = data.Bool("blockedByPlayer");
             ImagePath = data.Attr("imagePath","objects/DzhakeHelper/sequenceBlock/");
+            BackgroundBlock = data.Bool("backgroundBlock",true);
             BlockedByTheo = data.Bool("blockedByTheo");
             //BlockedByHoldables = data.Bool("blockedByHoldables");
             UseCustomColor = data.Bool("useCustomColor");

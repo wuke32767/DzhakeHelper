@@ -16,6 +16,7 @@ entities.DzhakeHelper/SequenceBlock.placements.name.sequence_block_2=Sequence Bl
 entities.DzhakeHelper/SequenceBlock.placements.name.sequence_block_3=Sequence Block (3 - Malachite)
 entities.DzhakeHelper/SequenceBlock.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
 entities.DzhakeHelper/SequenceBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+entities.DzhakeHelper/SequenceBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
 
 entities.DzhakeHelper/SequenceBlockManager.placements.name.normal=Sequence Block Controller
 entities.DzhakeHelper/SequenceBlockManager.attributes.description.everyDash=If checked then cycle blocks after every dash.
@@ -30,6 +31,7 @@ entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_2=Seque
 entities.DzhakeHelper/SequenceZipMover.placements.name.sequence_zipMover_3=Sequence Zip Mover (3 - Malachite)
 entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
 entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+entities.DzhakeHelper/SequenceBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
 
 entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
 

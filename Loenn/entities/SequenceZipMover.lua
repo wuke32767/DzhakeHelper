@@ -37,6 +37,9 @@ sequenceZipMover.fieldInformation = {
         editable = false,
         fieldType = "integer"
     },
+    color = {
+        fieldType = "color"
+    }
 }
 
 sequenceZipMover.placements = {}
@@ -49,6 +52,10 @@ for i = 1, 4 do
             height = 16,
             blockedByPlayer = true,
             blockedByTheo = true,
+            useCustomColor = false,
+            color = "ffffff",
+            imagePath = "objects/DzhakeHelper/sequenceZipMover/",
+            backgroundBlock = true,
         }
     }
 end
