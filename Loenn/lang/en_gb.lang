@@ -33,6 +33,22 @@ entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByPlayer=If
 entities.DzhakeHelper/SequenceZipMover.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
 entities.DzhakeHelper/SequenceBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
 
+entities.DzhakeHelper/SequenceFallingBlock.placements.name.sequence_block_0=Sequence Falling Block (0 - Blue)
+entities.DzhakeHelper/SequenceFallingBlock.placements.name.sequence_block_1=Sequence Falling Block (1 - Rose)
+entities.DzhakeHelper/SequenceFallingBlock.placements.name.sequence_block_2=Sequence Falling Block (2 - Bright Sun)
+entities.DzhakeHelper/SequenceFallingBlock.placements.name.sequence_block_3=Sequence Falling Block (3 - Malachite)
+entities.DzhakeHelper/SequenceFallingBlock.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
+entities.DzhakeHelper/SequenceFallingBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+entities.DzhakeHelper/SequenceFallingBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
+
+entities.DzhakeHelper/SequenceSwapBlock.placements.name.sequence_block_0=Sequence Swap Block (0 - Blue)
+entities.DzhakeHelper/SequenceSwapBlock.placements.name.sequence_block_1=Sequence Swap Block (1 - Rose)
+entities.DzhakeHelper/SequenceSwapBlock.placements.name.sequence_block_2=Sequence Swap Block (2 - Bright Sun)
+entities.DzhakeHelper/SequenceSwapBlock.placements.name.sequence_block_3=Sequence Swap Block (3 - Malachite)
+entities.DzhakeHelper/SequenceSwapBlock.attributes.description.blockedByPlayer=If checked then block will not appear if there is a player in front of it.
+entities.DzhakeHelper/SequenceSwapBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
+entities.DzhakeHelper/SequenceSwapBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
+
 entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
 
 entities.DzhakeHelper/DashAttackController.placements.name.normal=Dash Attack Controller

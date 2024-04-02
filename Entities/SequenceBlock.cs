@@ -65,13 +65,15 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public int blockHeight = 2;
 
-        private List<SequenceBlock> group;
+        public List<SequenceBlock> group;
 
         private bool groupLeader;
 
         private Vector2 groupOrigin;
 
         public Color color;
+
+        public Color PressedColor;
 
         private List<Image> pressed = new List<Image>();
 
@@ -128,27 +130,28 @@ namespace Celeste.Mod.DzhakeHelper.Entities
                 }
             }
             Add(occluder = new LightOcclude());
+
+            Color c = Calc.HexToColor("667da5");
+            PressedColor = new Color((float)(int)c.R / 255f * ((float)(int)color.R / 255f), (float)(int)c.G / 255f * ((float)(int)color.G / 255f), (float)(int)c.B / 255f * ((float)(int)color.B / 255f), 1f);
         }
 
 
         public override void Awake(Scene scene)
         {
             base.Awake(scene);
-            Color color = Calc.HexToColor("667da5");
-            Color disabledColor = new Color((float)(int)color.R / 255f * ((float)(int)this.color.R / 255f), (float)(int)color.G / 255f * ((float)(int)this.color.G / 255f), (float)(int)color.B / 255f * ((float)(int)this.color.B / 255f), 1f);
-            scene.Add(side = new BoxSide(this, disabledColor));
+            scene.Add(side = new BoxSide(this, PressedColor));
             foreach (StaticMover staticMover in staticMovers)
             {
                 if (staticMover.Entity is Spikes spikes)
                 {
                     spikes.EnabledColor = this.color;
-                    spikes.DisabledColor = disabledColor;
+                    spikes.DisabledColor = PressedColor;
                     spikes.VisibleWhenDisabled = true;
                     spikes.SetSpikeColor(this.color);
                 }
                 if (staticMover.Entity is Spring spring)
                 {
-                    spring.DisabledColor = disabledColor;
+                    spring.DisabledColor = PressedColor;
                     spring.VisibleWhenDisabled = true;
                 }
             }
@@ -461,6 +464,29 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         public SequenceBlock(EntityData data, Vector2 offset)
             : this(data, offset, new EntityID(data.Level.Name, data.ID))
         {
+        }
+
+        protected void AddCenterSymbol(Image solid, Image pressed)
+        {
+            this.solid.Add(solid);
+            this.pressed.Add(pressed);
+            List<Image> all = this.all;
+            Vector2 origin = groupOrigin - Position;
+            Vector2 size = new(Width, Height);
+
+            Vector2 half = (size - new Vector2(solid.Width, solid.Height)) * 0.5f;
+            solid.Origin = origin - half;
+            solid.Position = origin;
+            solid.Color = color;
+            Add(solid);
+            all.Add(solid);
+
+            half = (size - new Vector2(pressed.Width, pressed.Height)) * 0.5f;
+            pressed.Origin = origin - half;
+            pressed.Position = origin;
+            pressed.Color = color;
+            Add(pressed);
+            all.Add(pressed);
         }
     }
 
