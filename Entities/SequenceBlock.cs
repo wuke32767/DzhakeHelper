@@ -13,14 +13,6 @@ namespace Celeste.Mod.DzhakeHelper.Entities
     public class SequenceBlock : Solid
     {
 
-        public enum Modes
-        {
-            Solid,
-            Leaving,
-            Disabled,
-            Returning
-        }
-
         private class BoxSide : Entity
         {
             private SequenceBlock block;
@@ -58,8 +50,6 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         public float Tempo;
 
         public bool Activated;
-
-        public Modes Mode;
 
         public EntityID ID;
 

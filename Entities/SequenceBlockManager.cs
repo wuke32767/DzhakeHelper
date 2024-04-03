@@ -64,11 +64,15 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             {
                 entity.Activated = entity.Index == currentIndex;
             }
+
+            foreach (SequenceComponent component in base.Scene.Tracker.GetComponents<SequenceComponent>())
+            {
+                component.Activated = component.Index == currentIndex;
+            }
         }
 
         public void CycleSequenceBlocks()
         {
-
             currentIndex++;
             currentIndex = currentIndex % typesCount;
             UpdateBlocks();

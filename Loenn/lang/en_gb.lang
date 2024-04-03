@@ -49,6 +49,9 @@ entities.DzhakeHelper/SequenceSwapBlock.attributes.description.blockedByPlayer=I
 entities.DzhakeHelper/SequenceSwapBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
 entities.DzhakeHelper/SequenceSwapBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
 
+entities.DzhakeHelper/SequenceBerry.placements.name.normal=Sequence Berry
+entities.DzhakeHelper/SequenceBerry.placements.name.normal_winged=Sequence Berry (Winged)
+
 entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
 
 entities.DzhakeHelper/DashAttackController.placements.name.normal=Dash Attack Controller
