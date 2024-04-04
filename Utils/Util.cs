@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using Monocle;
+using Celeste.Mod.DzhakeHelper.Entities;
 
 namespace Celeste.Mod.DzhakeHelper;
 
@@ -272,4 +273,25 @@ public static class Util
         { DirectionEnum.TopRight, new Vector2(1f, -1f) },
         { DirectionEnum.TopLeft, new Vector2(-1f, -1f) },
     };
+
+    public static Dictionary<int,Color> DefaultSequenceColors = new() {
+        {0,Calc.HexToColor("5c5bda") },
+        {1,Calc.HexToColor("ff0051") },
+        {2,Calc.HexToColor("ffd700") },
+        {3,Calc.HexToColor("49dc88") },
+    };
+
+
+
+    public static void CycleSequenceColor(int times = 1)
+    {
+        SequenceBlockManager manager = Engine.Scene.Tracker.GetEntity<SequenceBlockManager>();
+        manager?.CycleSequenceBlocks(times);
+    }
+
+    public static void SetSequenceColor(int index)
+    {
+        SequenceBlockManager manager = Engine.Scene.Tracker.GetEntity<SequenceBlockManager>();
+        manager?.SetSequenceBlocks(index);
+    }
 }

@@ -1,7 +1,6 @@
 ﻿using Celeste.Mod.Entities;
 using Monocle;
 using Microsoft.Xna.Framework;
-using System.Reflection;
 
 namespace Celeste.Mod.DzhakeHelper.Entities
 {
@@ -11,12 +10,9 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
     public class SequenceBlockManager : Entity
     {
-
-        private int currentIndex;
-
         private int startWith;
 
-        private int typesCount = -1;
+        public int typesCount = -1;
 
         public bool everyDash;
 
@@ -44,7 +40,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             typesCount++;
             if (typesCount == 1) typesCount++; // 2 is minimum cuz why not
 
-            currentIndex = startWith;
+            DzhakeHelperModule.Session.ActiveSequenceIndex = startWith;
 
             UpdateBlocks();
 
@@ -62,26 +58,34 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         {
             foreach (SequenceBlock entity in base.Scene.Tracker.GetEntities<SequenceBlock>())
             {
-                entity.Activated = entity.Index == currentIndex;
+                entity.Activated = entity.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
             }
 
             foreach (SequenceComponent component in base.Scene.Tracker.GetComponents<SequenceComponent>())
             {
-                component.Activated = component.Index == currentIndex;
+                component.Activated = component.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
             }
+
+            foreach (SequenceSwitchBlock switchBlock in base.Scene.Tracker.GetEntities<SequenceSwitchBlock>())
+            {
+                switchBlock.NextColor(DzhakeHelperModule.Session.ActiveSequenceIndex, false);
+            } 
         }
 
-        public void CycleSequenceBlocks()
+        public void CycleSequenceBlocks(int times = 1)
         {
-            currentIndex++;
-            currentIndex = currentIndex % typesCount;
+            for (int i = 0;  i < times; i++)
+            {
+                DzhakeHelperModule.Session.ActiveSequenceIndex++;
+                DzhakeHelperModule.Session.ActiveSequenceIndex = DzhakeHelperModule.Session.ActiveSequenceIndex % typesCount;
+            }
+            // outside loop, cuz why do i need to update those each time?
             UpdateBlocks();
-
         }
 
         public void SetSequenceBlocks(int newIndex)
         {
-            currentIndex = newIndex;
+            DzhakeHelperModule.Session.ActiveSequenceIndex = newIndex;
             UpdateBlocks();
         }
 

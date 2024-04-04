@@ -32,21 +32,7 @@ public class SequenceComponent : Component
         }
         else
         {
-            switch (Index)
-            {
-                default:
-                    color = Calc.HexToColor("5c5bda");
-                    break;
-                case 1:
-                    color = Calc.HexToColor("ff0051");
-                    break;
-                case 2:
-                    color = Calc.HexToColor("ffd700");
-                    break;
-                case 3:
-                    color = Calc.HexToColor("49dc88");
-                    break;
-            }
+            color = Util.DefaultSequenceColors[Index];
         }
 
         Color c = Calc.HexToColor("667da5");

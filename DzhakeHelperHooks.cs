@@ -44,28 +44,16 @@ namespace Celeste.Mod.DzhakeHelper
             SequenceBlockManager manager = self.Scene.Tracker.GetEntity<SequenceBlockManager>();
             if (manager != null)
             {
-                if (DzhakeHelperModule.Session.HasSequenceDash && manager != null)
+                if (DzhakeHelperModule.Session.HasSequenceDash)
                 {
                     DzhakeHelperModule.Session.HasSequenceDash = false;
                     manager.CycleSequenceBlocks();
                 }
-                if (manager != null && manager.everyDash)
+                if (manager.everyDash)
                 {
                     manager.CycleSequenceBlocks();
                 }
             }
-            /*if (DzhakeHelperModule.Session.HasPufferDash)
-            {
-                Vector2 launch = self.ExplodeLaunch(self.Center - self.DashDir, false, false);
-                self.Dashes--;
-                Logger.Log(LogLevel.Error,"DzhakeHelper/DashHook", "X: " + launch.X.ToString() + " Y: " + launch.Y.ToString());
-                Logger.Log(LogLevel.Error, "DzhakeHelper/DashHook", "X: " + self.DashDir.X.ToString() + " Y: " + self.DashDir.Y.ToString());
-                Logger.Log(LogLevel.Error, "DzhakeHelper/DashHook", "new line");
-                self.SceneAs<Level>().Displacement.AddBurst(self.Center, 0.3f, 8f, 32f, 0.8f, null, null);
-                self.SceneAs<Level>().DirectionalShake(launch, 0.15f);
-                DzhakeHelperModule.Session.HasPufferDash = false;
-                callOrig = false;
-            }*/
 
             if (callOrig)
             {
@@ -86,7 +74,6 @@ namespace Celeste.Mod.DzhakeHelper
             if (DzhakeHelperModule.Session != null)
             {
                 DzhakeHelperModule.Session.HasSequenceDash = false;
-                DzhakeHelperModule.Session.HasPufferDash = false;
             }
         }
 

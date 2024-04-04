@@ -52,9 +52,11 @@ entities.DzhakeHelper/SequenceSwapBlock.attributes.description.backgroundBlock=I
 entities.DzhakeHelper/SequenceBerry.placements.name.normal=Sequence Berry
 entities.DzhakeHelper/SequenceBerry.placements.name.normal_winged=Sequence Berry (Winged)
 
-entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
+entities.DzhakeHelper/SequenceSwitchBlock.placements.name.normal=Sequence Switch Block
+entities.DzhakeHelper/SequenceSwitchBlock.attributes.description.customColors=Hex colors with "#", separeted by commas
 
-entities.DzhakeHelper/DashAttackController.placements.name.normal=Dash Attack Controller
+
+entities.DzhakeHelper/BackgroundWall.placements.name.normal=Background Wall
 
 entities.DzhakeHelper/CustomDecal.placements.name.normal=Custom Decal
 entities.DzhakeHelper/CustomDecal.attributes.description.imagePath=Relative to Graphics/Atlases/Gameplay/

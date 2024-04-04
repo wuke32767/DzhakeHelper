@@ -5,7 +5,6 @@ using System;
 namespace Celeste.Mod.DzhakeHelper {
     public class DzhakeHelperModuleSession : EverestModuleSession {
         public bool HasSequenceDash { get; set; } = false;
-        public bool HasPufferDash { get; set; } = false;
 
         public Dictionary<string, object> StoredVariables;
 
@@ -16,6 +15,8 @@ namespace Celeste.Mod.DzhakeHelper {
         public float TimedKillTriggerMaxTime { get; set; } = 0f;
 
         public Color TimedKillTriggerColor { get; set; } = Color.White;
+
+        public int ActiveSequenceIndex;
 
     }
 }
