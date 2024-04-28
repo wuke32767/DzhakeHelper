@@ -4,7 +4,7 @@ using Monocle;
 using System;
 using System.Collections;
 
-namespace Celeste.Mod.DzhakeHelper
+namespace Celeste.Mod.DzhakeHelper.Entites
 {
     [CustomEntity("DzhakeHelper/FreezeRefill")]
     public class FreezeRefill : Entity

@@ -78,7 +78,7 @@ public class SequenceSwapBlock : SequenceBlock
         : base(data,offset,id)
     {
         start = Position;
-        end = data.Nodes[0];
+        end = data.Nodes[0] + offset;
         this.noReturn = data.Bool("noReturn");
         maxForwardSpeed = 360f / Vector2.Distance(start, end);
         maxBackwardSpeed = maxForwardSpeed * 0.4f;

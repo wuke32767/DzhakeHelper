@@ -222,6 +222,9 @@ public class SequenceZipMover : SequenceBlock
 
     private static MTexture cog, cogPressed, cogWhite;
 
+    private readonly bool GoBackByNodes;
+    private readonly float DelayBetweenNodes;
+
     public SequenceZipMover(EntityData data,Vector2 offset, EntityID id)
         : base(data,offset)
     {
@@ -229,6 +232,8 @@ public class SequenceZipMover : SequenceBlock
         this.nodes = data.NodesWithPosition(offset);
         this.BlockedByPlayer = data.Bool("blockedByPlayer");
         this.BlockedByTheo = data.Bool("blockedByTheo");
+        DelayBetweenNodes = data.Float("delayBetweenNodes", 0.5f);
+        GoBackByNodes = data.Bool("goBackByNodes",false);
         if (ImagePath == "objects/DzhakeHelper/sequenceBlock/")
         {
             ImagePath = "objects/DzhakeHelper/sequenceZipMover/";
@@ -341,6 +346,7 @@ public class SequenceZipMover : SequenceBlock
             int i;
             for (i = 1; i < nodes.Length; i++)
             {
+                bool last = i == nodes.Length - 1;
                 to = nodes[i];
 
                 // Start shaking.
@@ -368,25 +374,82 @@ public class SequenceZipMover : SequenceBlock
                     MoveTo(vector);
                 }
 
-                bool last = i == nodes.Length - 1;
-
                 // Arrived, will wait for 0.5 secs.
                 StartShaking(0.2f);
                 Input.Rumble(RumbleStrength.Strong, RumbleLength.Medium);
                 SceneAs<Level>().Shake();
                 StopPlayerRunIntoAnimation = true;
-                yield return 0.5f;
+                yield return DelayBetweenNodes;
 
                 StopPlayerRunIntoAnimation = false;
-                at = 0f;
-                while (at < 1f)
+
+                if (last)
                 {
-                    yield return null;
-                    at = Calc.Approach(at, 1f, 0.5f * Engine.DeltaTime);
-                    percent = 1f - Ease.SineIn(at);
-                    Vector2 position = Vector2.Lerp(to, from, Ease.SineIn(at));
-                    //Vector2 vector = Vector2.Lerp(from, to, percent);
-                    MoveTo(position);
+                    at = 0f;
+                    if (!GoBackByNodes) // Just return to start
+                    {
+                        from = nodes[0];
+                        while (at < 1f)
+                        {
+                            yield return null;
+                            at = Calc.Approach(at, 1f, 0.5f * Engine.DeltaTime);
+                            percent = 1f - Ease.SineIn(at);
+                            Vector2 position = Vector2.Lerp(to, from, Ease.SineIn(at));
+                            //Vector2 vector = Vector2.Lerp(from, to, percent);
+                            MoveTo(position);
+                        }
+                    }
+                    else //oh god
+                    {
+                        from = nodes[i];
+                        int j;
+                        yield return DelayBetweenNodes;
+                        for (j = nodes.Length - 2; j > -1; j--)
+                        {
+                            to = nodes[j];
+
+                            // Start shaking.
+                            sfx.Play("event:/game/01_forsaken_city/zip_mover");
+                            Input.Rumble(RumbleStrength.Medium, RumbleLength.Short);
+                            StartShaking(0.1f);
+                            yield return 0.1f;
+
+
+                            // Start moving towards the target.
+                            StopPlayerRunIntoAnimation = false;
+                            at = 0f;
+                            while (at < 1f)
+                            {
+                                yield return null;
+                                at = Calc.Approach(at, 1f, 2f * Engine.DeltaTime);
+                                percent = Ease.SineIn(at);
+                                Vector2 vector = Vector2.Lerp(from, to, percent);
+                                vector = FixCassetteY(vector);
+
+                                ScrapeParticlesCheck(to);
+                                if (Scene.OnInterval(0.1f))
+                                    pathRenderer.CreateSparks();
+
+                                MoveTo(vector);
+                            }
+
+                            // Arrived, will wait for 0.5 secs.
+                            StartShaking(0.2f);
+                            Input.Rumble(RumbleStrength.Strong, RumbleLength.Medium);
+                            SceneAs<Level>().Shake();
+                            StopPlayerRunIntoAnimation = true;
+                            yield return DelayBetweenNodes;
+
+                            StopPlayerRunIntoAnimation = false;
+
+                            StopPlayerRunIntoAnimation = true;
+                            StartShaking(0.2f);
+                            yield return 0.5f;
+
+                            from = nodes[j];
+                        }
+                    }
+                    
                 }
 
                 StopPlayerRunIntoAnimation = true;

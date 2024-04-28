@@ -37,6 +37,22 @@ namespace Celeste.Mod.DzhakeHelper.Entities
                 }
             }
 
+            foreach (ManualSequenceComponent component in base.Scene.Tracker.GetComponents<ManualSequenceComponent>())
+            {
+                if (component.Index > typesCount)
+                {
+                    typesCount = component.Index;
+                }
+            }
+
+            foreach (SequenceComponent component1 in base.Scene.Tracker.GetComponents<SequenceComponent>())
+            {
+                if (component1.Index > typesCount)
+                {
+                    typesCount = component1.Index;
+                }
+            }
+
             typesCount++;
             if (typesCount == 1) typesCount++; // 2 is minimum cuz why not
 
@@ -61,7 +77,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
                 entity.Activated = entity.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
             }
 
-            foreach (SequenceComponent component in base.Scene.Tracker.GetComponents<SequenceComponent>())
+            foreach (ManualSequenceComponent component in base.Scene.Tracker.GetComponents<ManualSequenceComponent>())
             {
                 component.Activated = component.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
             }
@@ -70,6 +86,11 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             {
                 switchBlock.NextColor(DzhakeHelperModule.Session.ActiveSequenceIndex, false);
             } 
+
+            foreach (SequenceComponent component1 in base.Scene.Tracker.GetComponents<SequenceComponent>())
+            {
+                component1.Activated = component1.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
+            }
         }
 
         public void CycleSequenceBlocks(int times = 1)

@@ -56,6 +56,8 @@ for i = 1, 4 do
             color = "ffffff",
             imagePath = "objects/DzhakeHelper/sequenceZipMover/",
             backgroundBlock = true,
+            delayBetweenNodes = 0.5,
+            goBackByNodes = false,
         }
     }
 end
@@ -178,7 +180,7 @@ function sequenceZipMover.sprite(room, entity)
         nodeCogSprite:setPosition(centerNodeX, centerNodeY)
         nodeCogSprite:setJustification(0.5, 0.5)
 
-        local points = {centerX, centerY, centerNodeX, centerNodeY}
+        local points = {cx, cy, centerNodeX, centerNodeY}
         local leftLine = drawableLine.fromPoints(points, ropeColor, 1)
         local rightLine = drawableLine.fromPoints(points, ropeColor, 1)
 

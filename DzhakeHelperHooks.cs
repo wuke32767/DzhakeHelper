@@ -18,6 +18,7 @@ namespace Celeste.Mod.DzhakeHelper
             On.Celeste.Player.DashBegin += CustomDashBegin;
             On.Celeste.Player.Die += PlayerDeath;
             On.Celeste.Player.Update += PlayerUpdate;
+
             IL.Celeste.Player.Render += PlayerRender;
         }
 

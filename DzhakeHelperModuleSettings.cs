@@ -1,6 +1,8 @@
 namespace Celeste.Mod.DzhakeHelper {
 
-    public class DzhakeHelperModuleSettings : EverestModuleSettings {
+    public class DzhakeHelperModuleSettings : EverestModuleSettings
+    {
+
 
     }
 }

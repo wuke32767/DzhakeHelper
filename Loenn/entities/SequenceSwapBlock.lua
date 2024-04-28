@@ -112,7 +112,7 @@ function sequenceBlock.sprite(room, entity)
     end
 
     if entity.noReturn then
-        local cross = drawableSprite.fromTexture("objects/CommunalHelper/cassetteMoveBlock/x", entity)
+        local cross = drawableSprite.fromTexture(entity.crossImagePath .. "x", entity)
         cross:addPosition(math.floor(entity.width / 2), math.floor(entity.height / 2))
         cross:setColor(color)
         cross.depth = -11
@@ -120,7 +120,7 @@ function sequenceBlock.sprite(room, entity)
         table.insert(sprites, cross)
     end
 
-    dzhakeHelper.addTrailSprites(sprites, entity.x, entity.y, nodeX, nodeY, width, height, "objects/swapblock/target", color, 9000)
+    dzhakeHelper.addTrailSprites(sprites, entity.x, entity.y, nodeX, nodeY, width, height, entity.pathImagePath, color, 9000)
 
     return sprites
 end

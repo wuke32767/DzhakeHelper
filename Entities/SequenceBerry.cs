@@ -47,7 +47,7 @@ public class SequenceBerry : Entity, IStrawberry
 
     public bool Winged;
 
-    public SequenceComponent sequenceComponent;
+    public ManualSequenceComponent sequenceComponent;
 
     public bool OnlyGrabIfActive;
     public bool OnlyCollectIfActive;
@@ -57,7 +57,7 @@ public class SequenceBerry : Entity, IStrawberry
 
     public SequenceBerry(EntityData data, Vector2 offset, EntityID gid)
     {
-        Add(sequenceComponent = new SequenceComponent(data, this));
+        Add(sequenceComponent = new ManualSequenceComponent(data, this));
         ID = gid;
         Position = (start = data.Position + offset);
         Winged = data.Bool("winged");

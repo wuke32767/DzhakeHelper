@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Monocle;
 using System;
 
-namespace Celeste.Mod.DzhakeHelper
+namespace Celeste.Mod.DzhakeHelper.Entities
 {
     [CustomEntity("DzhakeHelper/VoidLift")]
     public class VoidLift : Entity
