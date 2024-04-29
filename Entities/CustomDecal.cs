@@ -1,12 +1,11 @@
 ﻿using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Celeste.Mod.DzhakeHelper.Entities
 {
     [CustomEntity("DzhakeHelper/CustomDecal")]
-    public class CustomDecal : Entity
+    public class CustomDecal : Decal
     {
 
         // -_-
@@ -19,20 +18,8 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         };
         public SpriteBank PathRoot;
 
-        public string ImagePath;
-
-        public Sprite Sprite;
-
-        public bool Animated;
-
-        public string Flag;
-
+        public string Flags;
         public bool UpdateSpriteOnlyIfFlag;
-
-        public bool InversedFlag;
-
-        public string AnimationName;
-        public string fullPath;
 
         public float Delay;
 
@@ -40,100 +27,25 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public bool HD;
 
-        public float Rotation;
-        public Color Color;
-        public Vector2 Scale;
-
-        public MTexture Image;
-
-        public CustomDecal(EntityData data, Vector2 offset) : this(data.Position, offset, data.Attr("imagePath"), data.Int("depth"), data.HexColorWithAlpha("color"), new Vector2(data.Float("scaleX"),
-            data.Float("scaleY")), data.Float("rotation"), data.Bool("animated"), data.Attr("flag"), data.Bool("updateSpriteOnlyIfFlag"), data.Bool("inversedFlag"), data.Attr("animationName"),
-            data.Float("delay"), data.Bool("attached"), data.Bool("hiRes"), data.Enum("pathRoot",SpriteBank.Game))
+        public CustomDecal(EntityData data, Vector2 offset) : this(data.Position, offset, data.Attr("texture"), data.Int("depth"), data.HexColorWithAlpha("color"), new Vector2(data.Float("scaleX"),
+            data.Float("scaleY")), data.Float("rotation"), data.Attr("flags"),
+            data.Bool("updateSpriteOnlyIfFlag"), data.Bool("hiRes"), data.Enum("pathRoot",SpriteBank.Game),data.Bool("removeDecalsFromPath"))
         {}
 
-        public CustomDecal(Vector2 position,Vector2 offset, string imagePath, int depth, Color color, Vector2 scale, float rotation, bool animated, string flag, bool updateSpriteOnlyIfFlag, bool inversedFlag,
-            string animationName, float delay, bool attached, bool hd, SpriteBank PathRoot) : base(position + offset)
+        public CustomDecal(Vector2 position,Vector2 offset, string texture, int depth, Color color, Vector2 scale, float rotation, string flag,
+            bool updateSpriteOnlyIfFlag, bool hd, SpriteBank PathRoot, bool removeDecalsFromPath) 
+           : base(texture,position + offset, scale, depth, rotation, color)
         {
-            base.Depth = depth;
-
             this.PathRoot = PathRoot;
-
             HD = hd;
             if (HD)
             {
                 Tag = TagsExt.SubHUD;
             }
 
-            Flag = flag;
+            Flags = flag;
             UpdateSpriteOnlyIfFlag = updateSpriteOnlyIfFlag;
-            InversedFlag = inversedFlag;
 
-            ImagePath = imagePath;
-            Animated = animated;
-            AnimationName = animationName;
-            Delay = delay;
-
-            Color = color;
-            Scale = scale;
-            Rotation = rotation;
-
-            fullPath = Animated ? ImagePath + AnimationName : ImagePath;
-
-
-            if (attached)
-            {
-                Add(new StaticMover
-                {
-                    OnShake = OnShake,
-                    OnEnable = OnEnable,
-                    OnDisable = OnDisable
-                });
-            }
-
-            UpdateSprite();
-        }
-
-        public override void Update()
-        {
-            if (Animated && Sprite != null && UpdateSpriteOnlyIfFlag)
-            {
-                if (FlagIsTrue())
-                {
-                    Sprite.Rate = 1f;
-                }
-                else
-                {
-                    Sprite.Rate = 0f;
-                }
-            }
-            base.Update();
-        }
-
-        public override void Render()
-        {
-            if (FlagIsTrue())
-            {
-                Vector2 displayPos = new Vector2(0, 0);
-                if (HD)
-                {
-                    Camera cam = SceneAs<Level>().Camera;
-                    displayPos = camScale * (this.Position - cam.Position) + camScale * entityOffset;
-                }
-                
-                
-
-                if (!Animated && Image != null)
-                {
-                    Image.DrawCentered(displayPos, Color, Scale, Rotation / 57.2958f);
-                }
-                Position += displayPos;
-                base.Render();
-                Position -= displayPos;
-            }
-        }
-
-        public void UpdateSprite()
-        {
             Atlas atlas = PathRoot switch
             {
                 SpriteBank.Game => GFX.Game,
@@ -143,29 +55,47 @@ namespace Celeste.Mod.DzhakeHelper.Entities
                 _ => GFX.Game,
             };
 
-            if (Sprite != null)
+            if (removeDecalsFromPath)
             {
-                Remove(Sprite);
+                Name = Name.Remove(0, 7);
             }
-            if (Animated)
+
+            textures = atlas.GetAtlasSubtextures(Name);
+        }
+
+        public override void Update()
+        {
+            if (UpdateSpriteOnlyIfFlag)
             {
-                Sprite = new Sprite(atlas,ImagePath);
-                Add(Sprite);
-                Sprite.Color = Color;
-                Sprite.Scale = Scale;
-                Sprite.Rotation = Rotation;
-                Sprite.AddLoop("normal", AnimationName, Delay);
-                Sprite.Play("normal");
+                if (!FlagIsTrue())
+                {
+                    frame -= AnimationSpeed * Engine.DeltaTime;
+                    if (frame < 0) frame = textures.Count; 
+                }
             }
-            else
+            base.Update();
+        }
+
+        public override void Render()
+        {
+            if (FlagIsTrue())
             {
-                Image = atlas[ImagePath];
+                Vector2 oldPos = Position;
+                if (HD)
+                {
+                    Camera cam = SceneAs<Level>().Camera;
+                    Vector2 displayPos = camScale * (this.Position - cam.Position) + camScale * entityOffset;
+                    Position = displayPos;
+                }
+                
+                base.Render();
+                Position = oldPos;
             }
         }
 
         public bool FlagIsTrue()
         {
-            return Flag == "" || ((base.Scene as Level).Session.GetFlag(Flag) != InversedFlag);
+            return Flags == "" || Util.ParseFlags(base.Scene as Level,Flags);
         }
 
 

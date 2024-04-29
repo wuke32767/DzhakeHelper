@@ -10,21 +10,18 @@ local CustomDecal = {
     placements = {
         name = "normal",
         data = {
-            imagePath = "_fallback",
-            animated = false,
-            animationName = "idle",
-            delay = 0.1,
+            texture = "_fallback",
             scaleX = 1,
             scaleY = 1,
             rotation = 0,
             color = "FFFFFF",
             depth = 0,
-            flag = "",
-            updateSpriteOnlyIfFlag = true,
-            inversedFlag = false,
+            flags = "",
+
             pathRoot = 0,
+            updateSpriteOnlyIfFlag = true,
             hiRes = false,
-            attached = false,
+            removeDecalsFromPath = false,
         },
     },
     fieldInformation = {
@@ -41,14 +38,14 @@ local CustomDecal = {
         }
     },
     fieldOrder = {
-        "x","y","pathRoot","imagePath","animationName","delay","depth","scaleX","scaleY","rotation","color","flag","attached","hiRes","updateSpriteOnlyIfFlag","inversedFlag"
+        "x","y","pathRoot","texture","depth","scaleX","scaleY","rotation","color","flags","hiRes","updateSpriteOnlyIfFlag","removeDecalsFromPath"
     }
 }
 
 function CustomDecal.texture(room, entity)
     if entity.hiRes then return "objects/DzhakeHelper/customHiResDecal/preview" end
-    if entity.animated then return entity.imagePath..entity.animationName.."00" end
-    return entity.imagePath
+    if not entity.removeDecalsFromPath then return "decals/"..entity.texture.."00" end
+    return entity.texture.."00"
 end
 
 return CustomDecal

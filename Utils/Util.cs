@@ -294,4 +294,25 @@ public static class Util
         SequenceBlockManager manager = Engine.Scene.Tracker.GetEntity<SequenceBlockManager>();
         manager?.SetSequenceBlocks(index);
     }
+
+
+    // https://github.com/Viv-0/VivHelper/blob/master/_Code/Module%2C%20Extensions%2C%20Etc/VivHelperModule.cs#L907
+    public static bool ParseFlags(Level l, string[] flags, string and_or = "and")
+    {
+        if (l == null)
+            return false;
+        bool b = and_or == "and";
+        if (flags == null || flags.Length == 0 || (flags.Length == 1 && flags[0] == ""))
+            return true;
+        foreach (string flag in flags)
+        {
+            if (and_or == "or") { b |= flag[0] != '!' ? l.Session.GetFlag(flag) : !l.Session.GetFlag(flag.TrimStart('!')); } else { b &= flag[0] != '!' ? l.Session.GetFlag(flag) : !l.Session.GetFlag(flag.TrimStart('!')); }
+        }
+        return b;
+    }
+
+    public static bool ParseFlags(Level l,string flags, string and_or = "and")
+    {
+        return ParseFlags(l, flags.Split(','),and_or);
+    }
 }
