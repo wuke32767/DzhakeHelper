@@ -14,6 +14,6 @@ rem echo "folders copied"
    xcopy %~dp0%%f %buildDir%%%f* /Y /H /Q
 ))
 rem echo "files copied"
-7zip a %~dp0DzhakeHelper.zip %buildDir%/*
+7z a %~dp0DzhakeHelper.zip %buildDir%/*
 rem echo "zipped"
 rem echo "finished"
