@@ -16,4 +16,5 @@ rem echo "folders copied"
 rem echo "files copied"
 7z a %~dp0DzhakeHelper.zip %buildDir%/*
 rem echo "zipped"
+rd /s /q "%builddir%"
 rem echo "finished"
