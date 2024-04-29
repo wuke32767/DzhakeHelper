@@ -76,7 +76,6 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             base.Update();
         }
 
-
         public override void Render()
         {
             if (FlagIsTrue())
