@@ -49,6 +49,19 @@ entities.DzhakeHelper/SequenceSwapBlock.attributes.description.blockedByPlayer=I
 entities.DzhakeHelper/SequenceSwapBlock.attributes.description.blockedByTheo=If checked then block will not appear if there is a theo crystal in front of it.
 entities.DzhakeHelper/SequenceSwapBlock.attributes.description.backgroundBlock=If checked then block will have static dark background (like cassette blocks), on by default.
 
+
+entities.DzhakeHelper/CustomMoveBlock.placements.name.up_steer=Custom Move Block (Up, Steerable)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.up_nosteer=Custom Move Block (Up)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.down_steer=Custom Move Block (Down, Steerable)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.down_nosteer=Custom Move Block (Down)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.right_steer=Custom Move Block (Right, Steerable)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.right_nosteer=Custom Move Block (Right)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.left_steer=Custom Move Block (Left, Steerable)
+entities.DzhakeHelper/CustomMoveBlock.placements.name.left_nosteer=Custom Move Block (Left)
+entities.DzhakeHelper/CustomMoveBlock.attributes.description.canSteer=Determines whether the move block can be moved by the player.
+entities.DzhakeHelper/CustomMoveBlock.attributes.description.direction=Determines the direction the move block moves in upon activation.
+
+
 entities.DzhakeHelper/SequenceBerry.placements.name.normal=Sequence Berry
 entities.DzhakeHelper/SequenceBerry.placements.name.normal_winged=Sequence Berry (Winged)
 

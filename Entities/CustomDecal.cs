@@ -27,9 +27,18 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public bool HD;
 
-        public CustomDecal(EntityData data, Vector2 offset) : this(data.Position, offset, data.Attr("texture"), data.Int("depth"), data.HexColorWithAlpha("color"), new Vector2(data.Float("scaleX"),
+        public static Entity Load(EntityData data, Vector2 offset)
+        {
+            return IsOldVersion(data)
+#pragma warning disable CS0618 // yes, i know, shut up vs
+              ? new ObsoleteCustomDecal(data, offset)
+#pragma warning restore CS0618
+              : new CustomDecal(data, offset);
+        }
+
+        public CustomDecal(EntityData data, Vector2 offset) : this  (data.Position, offset, data.Attr("texture"), data.Int("depth"), data.HexColorWithAlpha("color"), new Vector2(data.Float("scaleX"),
             data.Float("scaleY")), data.Float("rotation"), data.Attr("flags"),
-            data.Bool("updateSpriteOnlyIfFlag"), data.Bool("hiRes"), data.Enum("pathRoot",SpriteBank.Game),data.Bool("removeDecalsFromPath"))
+            data.Bool("updateSpriteOnlyIfFlag"), data.Bool("hiRes"), data.Enum("pathRoot", SpriteBank.Game), data.Bool("removeDecalsFromPath"))
         {}
 
         public CustomDecal(Vector2 position,Vector2 offset, string texture, int depth, Color color, Vector2 scale, float rotation, string flag,
@@ -98,20 +107,9 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             return Flags == "" || Util.ParseFlags(base.Scene as Level,Flags);
         }
 
-
-        private void OnShake(Vector2 amount)
+        public static bool IsOldVersion(EntityData data)
         {
-            shakeOffset += amount;
-        }
-
-        private void OnEnable()
-        {
-            Active = (Visible = (Collidable = true));
-        }
-
-        private void OnDisable()
-        {
-            Active = Visible = Collidable = false;
+            return data.Has("imagePath");
         }
     }
 }
