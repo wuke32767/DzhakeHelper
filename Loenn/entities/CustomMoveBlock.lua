@@ -34,7 +34,10 @@ for _, direction in ipairs(moveBlockDirections) do
                 moveSpeed = 60,
                 crashTime = 0.15,
                 crashResetTime = 0.1,
-                regenTime = 3
+                regenTime = 3,
+                idleFillColor = "474070",
+                pressedFillColor = "30b335",
+                breakingFillColor = "cc2541",
             }
         })
     end

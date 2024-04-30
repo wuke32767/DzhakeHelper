@@ -87,9 +87,6 @@ public class CustomMoveBlock : Solid
         {
             base.Tag = Tags.TransitionUpdate;
             base.Collider = new Hitbox(4f, 4f, -2f, -2f);
-            Add(sprite = new Image(Calc.Random.Choose(GFX.Game.GetAtlasSubtextures("objects/moveblock/debris"))));
-            sprite.CenterOrigin();
-            sprite.FlipX = Calc.Random.Chance(0.5f);
             onCollideH =   (CollisionData c) =>
             {
                 speed.X = (0f - speed.X) * 0.5f;
@@ -120,8 +117,12 @@ public class CustomMoveBlock : Solid
         }
 
          
-        public Debris Init(Vector2 position, Vector2 center, Vector2 returnTo)
+        public Debris Init(Vector2 position, Vector2 center, Vector2 returnTo, string texture)
         {
+            Add(sprite = new Image(Calc.Random.Choose(GFX.Game.GetAtlasSubtextures($"{texture}debris"))));
+            sprite.CenterOrigin();
+            sprite.FlipX = Calc.Random.Chance(0.5f);
+
             Collidable = true;
             Position = position;
             speed = (position - center).SafeNormalize(60f + Calc.Random.NextFloat(60f));
@@ -268,23 +269,34 @@ public class CustomMoveBlock : Solid
 
     public Border border;
 
-     
-    public Color fillColor = idleBgFill;
+
+    public Color fillColor;
     public float flash;
     public SoundSource moveSfx;
      
     public bool triggered;
      
-    public static Color idleBgFill = Calc.HexToColor("474070");
-    public static Color pressedBgFill = Calc.HexToColor("30b335");
-    public static Color breakingBgFill = Calc.HexToColor("cc2541");
+    public Color idleBgFill = Calc.HexToColor("474070");
+    public Color pressedBgFill = Calc.HexToColor("30b335");
+    public Color breakingBgFill = Calc.HexToColor("cc2541");
      
     public float particleRemainder;
 
+    public string Texture;
+
      
-    public CustomMoveBlock(Vector2 position, int width, int height, Directions direction, bool canSteer, string texture, float acceleration, float moveSpeed, float crashTime, float crashResetTime, float regenTime)
+    public CustomMoveBlock(Vector2 position, int width, int height, Directions direction, bool canSteer, string texture, float acceleration, float moveSpeed, float crashTime, float crashResetTime, float regenTime,
+        Color idleBgFill, Color pressedBgFill, Color breakingBgFill)
         : base(position, width, height, safe: false)
     {
+        this.idleBgFill = idleBgFill;
+        this.pressedBgFill = pressedBgFill;
+        this.breakingBgFill = breakingBgFill;
+
+        fillColor = this.idleBgFill;
+
+        Texture = texture;
+
         Accel = acceleration;
         MoveSpeed = moveSpeed;
         CrashTime = crashTime;
@@ -361,10 +373,11 @@ public class CustomMoveBlock : Solid
      
     public CustomMoveBlock(EntityData data, Vector2 offset)
         : this(data.Position + offset, data.Width, data.Height, data.Enum("direction", Directions.Left), data.Bool("canSteer", true), data.Attr("texture", "objects/moveBlock/"),
-              data.Float("acceleration", 300f), data.Float("moveSpeed", 60f), data.Float("crashTime", 0.15f), data.Float("crashResetTime", 0.1f), data.Float("regenTime",3f))
+              data.Float("acceleration", 300f), data.Float("moveSpeed", 60f), data.Float("crashTime", 0.15f), data.Float("crashResetTime", 0.1f), data.Float("regenTime",3f),
+              data.HexColorWithAlpha("idleFillColor", Calc.HexToColor("474070")), data.HexColorWithAlpha("pressedFillColor", Calc.HexToColor("30b335")), data.HexColorWithAlpha("breakingFillColor", Calc.HexToColor("cc2541")))
     {
     }
-     
+
     public override void Awake(Scene scene)
     {
         base.Awake(scene);
@@ -528,7 +541,7 @@ public class CustomMoveBlock : Solid
                 for (int j = 0; (float)j < Height; j += 8)
                 {
                     Vector2 vector2 = new Vector2((float)i + 4f, (float)j + 4f);
-                    Debris debris2 = Engine.Pooler.Create<Debris>().Init(Position + vector2, Center, startPosition + vector2);
+                    Debris debris2 = Engine.Pooler.Create<Debris>().Init(Position + vector2, Center, startPosition + vector2, Texture);
                     debris.Add(debris2);
                     Scene.Add(debris2);
                 }
@@ -835,7 +848,7 @@ public class CustomMoveBlock : Solid
         }
         else
         {
-            GFX.Game["objects/moveBlock/x"].DrawCentered(base.Center);
+            GFX.Game[$"{Texture}x"].DrawCentered(base.Center);
         }
 
         float num = flash * 4f;
