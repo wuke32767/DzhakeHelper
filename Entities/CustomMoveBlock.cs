@@ -225,9 +225,9 @@ public class CustomMoveBlock : Solid
         }
     }
 
-    public static ParticleType P_Activate;
-    public static ParticleType P_Break;
-    public static ParticleType P_Move;
+    public static ParticleType P_Activate = MoveBlock.P_Activate;
+    public static ParticleType P_Break = MoveBlock.P_Break;
+    public static ParticleType P_Move = MoveBlock.P_Move;
      
     public float Accel = 300f;
     public float MoveSpeed = 60f;
