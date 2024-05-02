@@ -6,6 +6,7 @@ using FMOD.Studio;
 using Microsoft.Xna.Framework;
 using Monocle;
 using MonoMod;
+using Celeste.Mod.DzhakeHelper.Components;
 
 namespace Celeste.Mod.DzhakeHelper.Entities;
 
@@ -286,7 +287,7 @@ public class CustomMoveBlock : Solid
 
      
     public CustomMoveBlock(Vector2 position, int width, int height, Directions direction, bool canSteer, string texture, float acceleration, float moveSpeed, float crashTime, float crashResetTime, float regenTime,
-        Color idleBgFill, Color pressedBgFill, Color breakingBgFill)
+        Color idleBgFill, Color pressedBgFill, Color breakingBgFill, bool bottomButton)
         : base(position, width, height, safe: false)
     {
         this.idleBgFill = idleBgFill;
@@ -368,13 +369,18 @@ public class CustomMoveBlock : Solid
         Add(new Coroutine(Controller()));
         UpdateColors();
         Add(new LightOcclude(0.5f));
+        if (this.canSteer && bottomButton)
+        {
+            Add(new MoveBlockBottomComponent());
+        }
     }
 
      
     public CustomMoveBlock(EntityData data, Vector2 offset)
         : this(data.Position + offset, data.Width, data.Height, data.Enum("direction", Directions.Left), data.Bool("canSteer", true), data.Attr("texture", "objects/moveBlock/"),
               data.Float("acceleration", 300f), data.Float("moveSpeed", 60f), data.Float("crashTime", 0.15f), data.Float("crashResetTime", 0.1f), data.Float("regenTime",3f),
-              data.HexColorWithAlpha("idleFillColor", Calc.HexToColor("474070")), data.HexColorWithAlpha("pressedFillColor", Calc.HexToColor("30b335")), data.HexColorWithAlpha("breakingFillColor", Calc.HexToColor("cc2541")))
+              data.HexColorWithAlpha("idleFillColor", Calc.HexToColor("474070")), data.HexColorWithAlpha("pressedFillColor", Calc.HexToColor("30b335")), data.HexColorWithAlpha("breakingFillColor", Calc.HexToColor("cc2541")),
+              data.Bool("bottomButton"))
     {
     }
 
@@ -819,6 +825,10 @@ public class CustomMoveBlock : Solid
     {
         Vector2 position = Position;
         Position += base.Shake;
+        if (Get<MoveBlockBottomComponent>() is { } component)
+        {
+            component.Render();
+        }
         foreach (Image item in leftButton)
         {
             item.Render();
