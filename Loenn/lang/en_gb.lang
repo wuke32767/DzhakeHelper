@@ -76,6 +76,7 @@ entities.DzhakeHelper/CustomDecal.attributes.description.updateSpriteOnlyIfFlag=
 entities.DzhakeHelper/CustomDecal.attributes.description.removeDecalsFromPath=If not checked, then "decals/" is added to start of path, just because how this entity works
 
 entities.DzhakeHelper/VoidLift.placements.name.normal=Void Lift
+entities.DzhakeHelper/VoidLift.attributes.description.sfx=Sfx to play when used, leave empty to not play anything
 
 entities.DzhakeHelper/RainbowHairBadelineDummy.placements.name.normal=Rainbow Hair Badeline Dummy
 

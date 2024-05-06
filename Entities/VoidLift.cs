@@ -77,7 +77,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         public override void Update()
         {
             base.Update();
-            if(RespawnTimer > 0)
+            if (RespawnTimer > 0)
             {
                 RespawnTimer -= Engine.DeltaTime;
                 if (RespawnTimer < 0) RespawnTimer = 0;
@@ -95,15 +95,16 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         private void OnPlayer(Player player)
         {
-            if (player.DashAttacking && RespawnTimer >= 0
+            if (player.DashAttacking
+                && RespawnTimer <= 0
                 && (((player.DashDir == Util.Directions[Util.DirectionEnum.Right]) && DashToRight)
                 || ((player.DashDir == Util.Directions[Util.DirectionEnum.Left]) && DashToLeft)
                 || ((player.DashDir == Util.Directions[Util.DirectionEnum.Bottom]) && DashToBottom)
                 || ((player.DashDir == Util.Directions[Util.DirectionEnum.Top]) && DashToTop)
-                || (player.DashDir.X > 0.5f && player.DashDir.Y > 0.5f && DashToBottomRight)
-                || (player.DashDir.X < -0.5f && player.DashDir.Y > 0.5f && DashToBottomLeft)
-                || (player.DashDir.X > 0.5f && player.DashDir.Y < -0.5f && DashToTopRight)
-                || (player.DashDir.X < -0.5f && player.DashDir.Y < -0.5f && DashToTopLeft)))
+                || (player.DashDir.X > 0f && player.DashDir.Y > 0f && DashToBottomRight)
+                || (player.DashDir.X < 0f && player.DashDir.Y > 0f && DashToBottomLeft)
+                || (player.DashDir.X > 0f && player.DashDir.Y < 0f && DashToTopRight)
+                || (player.DashDir.X < 0f && player.DashDir.Y < 0f && DashToTopLeft)))
             {
                 player.DashDir = new Vector2(0, -1);
 
@@ -114,6 +115,8 @@ namespace Celeste.Mod.DzhakeHelper.Entities
                 {
                     player.RefillDash();
                 }
+
+                RespawnTimer = 0.1f;
 
                 player.RefillStamina();
                 player.StateMachine.State = 0;
