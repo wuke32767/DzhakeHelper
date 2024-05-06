@@ -13,6 +13,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public float NewSpeed;
         public bool RefillDash;
+        public bool SetSpeedXToZero;
 
         public float RespawnTimer;
 
@@ -27,6 +28,8 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         public bool DashToBottomLeft;
         public bool DashToBottomRight;
 
+        public string sfx;
+
         // Deco :D
         private readonly BloomPoint bloom;
         private readonly VertexLight light;
@@ -40,8 +43,9 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
             NewSpeed = data.Float("newSpeed", -400);
             RefillDash = data.Bool("refillDash", false);
+            SetSpeedXToZero = data.Bool("setSpeedxToZero", true);
 
-            string str = "objects/DzhakeHelper/voidLift/";
+            string str = data.Attr("sprite");
             Add(sprite = new Sprite(GFX.Game, str + "idle"));
             sprite.AddLoop("idle", "", 0.1f);
             sprite.Play("idle");
@@ -56,6 +60,8 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             DashToTopRight = data.Bool("dashToTopRight");
             DashToBottomLeft = data.Bool("dashToBottomLeft");
             DashToBottomRight = data.Bool("dashToBottomRight");
+
+            sfx = data.Attr("sfx");
 
 
             Add(bloom = new BloomPoint(0.8f, 16f));
@@ -90,14 +96,14 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         private void OnPlayer(Player player)
         {
             if (player.DashAttacking && RespawnTimer >= 0
-                && ((player.DashDir == Util.Directions[Util.DirectionEnum.Right]) && DashToRight)
+                && (((player.DashDir == Util.Directions[Util.DirectionEnum.Right]) && DashToRight)
                 || ((player.DashDir == Util.Directions[Util.DirectionEnum.Left]) && DashToLeft)
                 || ((player.DashDir == Util.Directions[Util.DirectionEnum.Bottom]) && DashToBottom)
                 || ((player.DashDir == Util.Directions[Util.DirectionEnum.Top]) && DashToTop)
-                || ((player.DashDir == Util.Directions[Util.DirectionEnum.BottomRight]) && DashToBottomRight)
-                || ((player.DashDir == Util.Directions[Util.DirectionEnum.BottomLeft]) && DashToBottomLeft)
-                || ((player.DashDir == Util.Directions[Util.DirectionEnum.TopRight]) && DashToTopRight)
-                || ((player.DashDir == Util.Directions[Util.DirectionEnum.TopLeft]) && DashToTopLeft))
+                || (player.DashDir.X > 0.5f && player.DashDir.Y > 0.5f && DashToBottomRight)
+                || (player.DashDir.X < -0.5f && player.DashDir.Y > 0.5f && DashToBottomLeft)
+                || (player.DashDir.X > 0.5f && player.DashDir.Y < -0.5f && DashToTopRight)
+                || (player.DashDir.X < -0.5f && player.DashDir.Y < -0.5f && DashToTopLeft)))
             {
                 player.DashDir = new Vector2(0, -1);
 
@@ -123,9 +129,13 @@ namespace Celeste.Mod.DzhakeHelper.Entities
                 player.Sprite.Scale = new Vector2(0.6f, 1.4f);
                 player.Collider = collider;
 
-                player.Speed.X = 0f;
+                if (SetSpeedXToZero) player.Speed.X = 0f;
 
                 (Scene as Level).ParticlesFG.Emit(BadelineOldsite.P_Vanish, 12, base.Center, Vector2.One * 6f);
+                if (!string.IsNullOrEmpty(sfx))
+                {
+                    SoundEmitter.Play(sfx);
+                }
             }
         }
     }

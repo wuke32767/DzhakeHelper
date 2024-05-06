@@ -12,6 +12,7 @@ namespace Celeste.Mod.DzhakeHelper;
 // This file is not really by me :p
 public static class Util
 {
+    public static Random random = new Random(Guid.NewGuid().GetHashCode());
     public static void Log(LogLevel logLevel, string str)
     {
         Logger.Log(logLevel, "Dzhake Helper", str);
@@ -26,6 +27,11 @@ public static class Util
     {
         player = Engine.Scene?.Tracker?.GetEntity<Player>();
         return player != null;
+    }
+
+    public static Level GetLevel()
+    {
+        return Engine.Scene as Level;
     }
 
     private static readonly PropertyInfo[] namedColors = typeof(Color).GetProperties();

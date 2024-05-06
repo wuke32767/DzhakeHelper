@@ -16,7 +16,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public bool everyDash;
 
-
+        public int CurrentColor { get { return DzhakeHelperModule.Session.ActiveSequenceIndex; } set { DzhakeHelperModule.Session.ActiveSequenceIndex = value; } }
 
         public SequenceBlockManager(EntityData data, Vector2 offset) : base(data.Position + offset)
         {
@@ -56,7 +56,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
             typesCount++;
             if (typesCount == 1) typesCount++; // 2 is minimum cuz why not
 
-            DzhakeHelperModule.Session.ActiveSequenceIndex = startWith;
+            CurrentColor = startWith;
 
             UpdateBlocks();
 
@@ -74,31 +74,37 @@ namespace Celeste.Mod.DzhakeHelper.Entities
         {
             foreach (SequenceBlock entity in base.Scene.Tracker.GetEntities<SequenceBlock>())
             {
-                entity.Activated = entity.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
+                entity.Activated = entity.Index == CurrentColor;
             }
 
             foreach (ManualSequenceComponent component in base.Scene.Tracker.GetComponents<ManualSequenceComponent>())
             {
-                component.Activated = component.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
+                component.Activated = component.Index == CurrentColor;
             }
 
             foreach (SequenceSwitchBlock switchBlock in base.Scene.Tracker.GetEntities<SequenceSwitchBlock>())
             {
-                switchBlock.NextColor(DzhakeHelperModule.Session.ActiveSequenceIndex, false);
+                switchBlock.NextColor(CurrentColor, false);
             } 
 
             foreach (SequenceComponent component1 in base.Scene.Tracker.GetComponents<SequenceComponent>())
             {
-                component1.Activated = component1.Index == DzhakeHelperModule.Session.ActiveSequenceIndex;
+                component1.Activated = component1.Index == CurrentColor;
             }
+
+            for (int i = 0; i < 5; i++)
+            {
+                (Engine.Scene as Level)?.Session?.SetFlag($"DzhakeHelper_Sequence_{i}", false);
+            }
+            (Engine.Scene as Level)?.Session?.SetFlag($"DzhakeHelper_Sequence_{CurrentColor}", true);
         }
 
         public void CycleSequenceBlocks(int times = 1)
         {
             for (int i = 0;  i < times; i++)
             {
-                DzhakeHelperModule.Session.ActiveSequenceIndex++;
-                DzhakeHelperModule.Session.ActiveSequenceIndex = DzhakeHelperModule.Session.ActiveSequenceIndex % typesCount;
+                CurrentColor++;
+                CurrentColor = CurrentColor % typesCount;
             }
             // outside loop, cuz why do i need to update those each time?
             UpdateBlocks();
@@ -106,7 +112,7 @@ namespace Celeste.Mod.DzhakeHelper.Entities
 
         public void SetSequenceBlocks(int newIndex)
         {
-            DzhakeHelperModule.Session.ActiveSequenceIndex = newIndex;
+            CurrentColor = newIndex;
             UpdateBlocks();
         }
 
