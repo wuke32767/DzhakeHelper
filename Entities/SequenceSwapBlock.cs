@@ -304,7 +304,7 @@ public class SequenceSwapBlock : SequenceBlock
                 #endregion
             }
         }
-        
+
     }
 
     private void MoveParticles(Vector2 normal)
@@ -352,25 +352,31 @@ public class SequenceSwapBlock : SequenceBlock
     {
         int tilesX = (int)(width / 8f);
         int tilesY = (int)(height / 8f);
-        ninSlice[0, 0].Draw(pos + new Vector2(0f, 0f), Vector2.Zero, color);
-        ninSlice[2, 0].Draw(pos + new Vector2(width - 8f, 0f), Vector2.Zero, color);
-        ninSlice[0, 2].Draw(pos + new Vector2(0f, height - 8f), Vector2.Zero, color);
-        ninSlice[2, 2].Draw(pos + new Vector2(width - 8f, height - 8f), Vector2.Zero, color);
-        for (int i = 1; i < tilesX - 1; i++)
+        var camera = SceneAs<Level>().Camera;
+        var from = ((new Vector2(camera.Left, camera.Top) - pos) / 8).Floor();
+        var size = ((new Vector2(camera.Right, camera.Bottom) - pos) / 8).Ceiling();
+
+        int ito = (int)Math.Min(size.X, tilesX);
+        int ifrom = (int)Math.Max(0, from.X);
+        int jfrom = (int)Math.Max(0, from.Y);
+        int jto = (int)Math.Min(size.Y, tilesY);
+        for (int i = ifrom; i < ito; i++)
         {
-            ninSlice[1, 0].Draw(pos + new Vector2(i * 8, 0f), Vector2.Zero, color);
-            ninSlice[1, 2].Draw(pos + new Vector2(i * 8, height - 8f), Vector2.Zero, color);
-        }
-        for (int j = 1; j < tilesY - 1; j++)
-        {
-            ninSlice[0, 1].Draw(pos + new Vector2(0f, j * 8), Vector2.Zero, color);
-            ninSlice[2, 1].Draw(pos + new Vector2(width - 8f, j * 8), Vector2.Zero, color);
-        }
-        for (int k = 1; k < tilesX - 1; k++)
-        {
-            for (int l = 1; l < tilesY - 1; l++)
+            for (int j = jfrom; j < jto; j++)
             {
-                ninSlice[1, 1].Draw(pos + (new Vector2(k, l) * 8f), Vector2.Zero, color);
+                int ir = i switch
+                {
+                    0 => 0,
+                    _ when i == tilesX - 1 => 2,
+                    _ => 1
+                };
+                int jr = j switch
+                {
+                    0 => 0,
+                    _ when j == tilesY - 1 => 2,
+                    _ => 1
+                };
+                ninSlice[ir, jr].Draw(pos + (new Vector2(i, j) * 8f), Vector2.Zero, color);
             }
         }
 
